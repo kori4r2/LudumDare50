@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movable : MonoBehaviour {
-    void Start() {
-        
-    }
+namespace LudumDare50 {
+    public class Movable : MonoBehaviour {
+        void Start() {
+            
+        }
 
-    void Update() {
-        
+        void Update() {
+            
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
+    [CreateAssetMenu(menuName="Events/VoidEvent")]
 	public class EventSO : ScriptableObject {
 		private List<IEventListener> listeners = new List<IEventListener>();
 

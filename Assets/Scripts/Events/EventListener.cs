@@ -11,11 +11,11 @@ namespace LudumDare50 {
             eventCallback?.Invoke();
         }
 
-        public void StartListening() {
+        public void StartListeningEvent() {
             eventListened?.AddListener(this);
         }
 
-        public void StopListening() {
+        public void StopListeningEvent() {
             eventListened?.RemoveListener(this);
         }
     }
