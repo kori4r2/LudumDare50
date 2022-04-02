@@ -1,0 +1,64 @@
+{
+    "name": "Inputs",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "aa830c2c-feb4-4e8b-8e44-69875227c9fd",
+            "actions": [
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "89b168b0-48aa-4280-a2b1-3f13caf143d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Hold",
+                    "type": "PassThrough",
+                    "id": "c11cf54e-96be-4a70-9c6c-8f52f69b43f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d3284357-30e9-4858-bcbe-efb3587f447a",
+                    "path": "<Pointer>/press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Pointer",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48809283-7415-4826-9333-059ac2c52aae",
+                    "path": "<Pointer>/press",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Pointer",
+                    "action": "Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Pointer",
+            "bindingGroup": "Pointer",
+            "devices": [
+                {
+                    "devicePath": "<Pointer>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
