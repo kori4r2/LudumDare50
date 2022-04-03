@@ -74,6 +74,7 @@ namespace LudumDare50 {
         }
 
         private void HideHook() {
+            transform.localPosition = startingPosition;
             StopHookMovement();
             spriteRenderer.enabled = false;
             IsAiming = false;

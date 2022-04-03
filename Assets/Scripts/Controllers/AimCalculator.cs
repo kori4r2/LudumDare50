@@ -14,10 +14,10 @@ namespace LudumDare50 {
         private Vector2 swingStartingPoint {
             get {
                 return tIndex switch {
-                    0 => Vector2.up,
-                    1 => Quaternion.AngleAxis(QuarterPeriod * swingingSpeed, Vector3.forward) * Vector2.up,
-                    2 => Vector2.up,
-                    3 => Quaternion.AngleAxis(QuarterPeriod * swingingSpeed, Vector3.back) * Vector2.up,
+                    0 => Quaternion.AngleAxis(QuarterPeriod * swingingSpeed, Vector3.forward) * Vector2.up,
+                    1 => Vector2.up,
+                    2 => Quaternion.AngleAxis(QuarterPeriod * swingingSpeed, Vector3.back) * Vector2.up,
+                    3 => Vector2.up,
                     _ => Vector2.zero
                 };
             }
@@ -25,11 +25,11 @@ namespace LudumDare50 {
 
         public void StartSwinging() {
             aimTime = 0;
-            ThrowDirection = Vector2.up;
+            ThrowDirection = swingStartingPoint;
         }
 
         public void UpdateAim(float deltaTime) {
-            Vector3 rotationAxis = ((tIndex+1)%4 < 2)? Vector3.forward : Vector3.back;
+            Vector3 rotationAxis = (tIndex > 1)? Vector3.forward : Vector3.back;
             int nQuarterPeriodsPassed = Mathf.FloorToInt(aimTime / QuarterPeriod);
             float swingOffsetTime = aimTime - nQuarterPeriodsPassed * QuarterPeriod;
             ThrowDirection = Quaternion.AngleAxis(swingingSpeed * swingOffsetTime, rotationAxis) * swingStartingPoint;
