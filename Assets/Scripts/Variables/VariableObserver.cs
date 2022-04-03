@@ -8,7 +8,13 @@ namespace LudumDare50
 	[System.Serializable]
 	public class VariableObserver<T> : IVariableObserver<T> {
         [SerializeField] private GenericVariable<T> observedVariable;
-        [SerializeField] private UnityEvent<T> callbackOnChange;
+        [SerializeField] private UnityEvent<T> callbackOnChange = new UnityEvent<T>();
+
+        public VariableObserver(GenericVariable<T> variable, UnityAction<T> response) {
+            observedVariable = variable;
+            callbackOnChange = new UnityEvent<T>();
+            callbackOnChange.AddListener(response);
+        }
 
 		public void OnValueChanged(T newValue) {
             callbackOnChange?.Invoke(newValue);

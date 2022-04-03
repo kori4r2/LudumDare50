@@ -10,8 +10,10 @@ namespace LudumDare50 {
         private Vector2 pointerPosition = Vector2.zero;
         public Vector2 PointerPosition => pointerPosition;
 
-        public UnityEvent OnPress { get; private set; } = new UnityEvent();
-        public UnityEvent OnRelease { get; private set; } = new UnityEvent();
+        [SerializeField] private UnityEvent onPress = new UnityEvent();
+        public UnityEvent OnPress => onPress;
+        [SerializeField] private UnityEvent onRelease = new UnityEvent();
+        public UnityEvent OnRelease => onRelease;
         private Camera mainCamera = null;
         private Camera MainCamera {
             get{
@@ -38,11 +40,11 @@ namespace LudumDare50 {
         }
 
         private void OnPressPointer(InputAction.CallbackContext context) {
-            OnPress?.Invoke();
+            onPress?.Invoke();
         }
 
         private void OnReleasePointer(InputAction.CallbackContext context) {
-            OnRelease?.Invoke();
+            onRelease?.Invoke();
         }
 
         private void OnMovePointer(InputAction.CallbackContext context) {

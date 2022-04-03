@@ -6,22 +6,24 @@ using UnityEngine.InputSystem;
 namespace LudumDare50 {
     public class Character : MonoBehaviour {
         [Header("Input")]
-        [SerializeField] private InputActionReference pointerPressAction;
-        [SerializeField] private InputActionReference pointerPositionAction;
+        [SerializeField] private PointerInputProcessor pointerInputProcessor;
         [Header("Movement")]
+        [SerializeField] private Movable2D movable2D;
         [SerializeField, Range(0f, 20f)] private float moveSpeed;
         [SerializeField, Range(0f, 1f)] private float deadzoneSize;
-        [SerializeField] private Rigidbody2D characterRigidBody;
+        [SerializeField] private BoolVariable canMove;
+        private VariableObserver<bool> canMoveObserver;
         [SerializeField] private Collider2D characterCollider;
+        [Header("Hook")]
+        [SerializeField] private Hook hook;
+        public const string characterTag = "Character";
 
-        private PointerInputProcessor pointerInputProcessor;
-        private Movable2D movable2D;
         private bool isMoving = false;
 
         private void Awake() {
-			pointerInputProcessor = new PointerInputProcessor(pointerPressAction, pointerPositionAction);
+            canMove.Value = true;
 			SetInputProcessorCallbacks();
-			movable2D = new Movable2D(characterRigidBody);
+            canMoveObserver = new VariableObserver<bool>(canMove, OnCanMoveChanged);
 		}
 
 		private void SetInputProcessorCallbacks() {
@@ -29,11 +31,21 @@ namespace LudumDare50 {
 			pointerInputProcessor.OnRelease.AddListener(OnPointerRelease);
 		}
 
-		private void OnPointerPress() {
-			if (IsPointerOverCharacter()) {
+        private void OnCanMoveChanged(bool newCanMoveValue) {
+            if (!newCanMoveValue) {
                 movable2D.BlockMovement();
+            }
+        }
+
+		private void OnPointerPress() {
+            if(!canMove.Value)
+                return;
+
+			if (IsPointerOverCharacter()) {
+                canMove.Value = false;
+                hook.StartAiming();
 			} else {
-				movable2D.AllowDynamicMovement();
+                movable2D.AllowDynamicMovement();
                 isMoving = true;
 				MoveCharacterTowardsPointer();
 			}
@@ -62,6 +74,11 @@ namespace LudumDare50 {
 		}
 
 		private void OnPointerRelease() {
+            if(hook.IsAiming){
+                hook.ThrowHook();
+                return;
+            }
+
             movable2D.BlockMovement();
             isMoving = false;
         }
@@ -75,10 +92,12 @@ namespace LudumDare50 {
 
         private void OnEnable() {
             pointerInputProcessor.Enable();
+            canMoveObserver.StartWatching();
         }
 
         private void OnDisable() {
             pointerInputProcessor.Disable();
+            canMoveObserver.StopWatching();
         }
 
         private void FixedUpdate() {
