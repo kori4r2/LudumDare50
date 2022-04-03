@@ -14,10 +14,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Hold",
-                    "type": "PassThrough",
+                    "name": "Position",
+                    "type": "Value",
                     "id": "c11cf54e-96be-4a70-9c6c-8f52f69b43f6",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -37,11 +37,11 @@
                 {
                     "name": "",
                     "id": "48809283-7415-4826-9333-059ac2c52aae",
-                    "path": "<Pointer>/press",
-                    "interactions": "Hold",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Pointer",
-                    "action": "Hold",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
