@@ -49,7 +49,6 @@ namespace LudumDare50 {
             Vector2 actionValue = context.ReadValue<Vector2>();
             Vector2 screenSize = new Vector2(Screen.width, Screen.height);
             Vector2 screenPosition = ClampVector2(actionValue, Vector2.zero, screenSize);
-            // Debug.Log($"actionValue = {actionValue}, screenSize = {screenSize}, screenPosition = {screenPosition}");
             pointerPosition = MainCamera.ScreenToWorldPoint(screenPosition);
         }
 

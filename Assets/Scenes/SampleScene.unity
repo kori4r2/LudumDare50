@@ -177,6 +177,7 @@ MonoBehaviour:
   pointerPressAction: {fileID: -5585333772637410564, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
   pointerPositionAction: {fileID: -2673544153465511000, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
   moveSpeed: 5
+  deadzoneSize: 0.5
   characterRigidBody: {fileID: 166701507}
   characterCollider: {fileID: 2146368573}
 --- !u!4 &166701509

@@ -10,6 +10,7 @@ namespace LudumDare50 {
         [SerializeField] private InputActionReference pointerPositionAction;
         [Header("Movement")]
         [SerializeField, Range(0f, 20f)] private float moveSpeed;
+        [SerializeField, Range(0f, 1f)] private float deadzoneSize;
         [SerializeField] private Rigidbody2D characterRigidBody;
         [SerializeField] private Collider2D characterCollider;
 
@@ -44,9 +45,20 @@ namespace LudumDare50 {
 		}
 
 		private void MoveCharacterTowardsPointer() {
-            Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
-			Vector2 direction = new Vector2(pointerPosition.x - transform.position.x, 0).normalized;
+			Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
+			Vector2 direction = GetDirectionToPointer(pointerPosition);
 			movable2D.SetVelocity(direction * moveSpeed);
+		}
+
+		private Vector2 GetDirectionToPointer(Vector2 pointerPosition) {
+            if(IsPointerInsideDeadzone(pointerPosition))
+                return Vector2.zero;
+
+			return new Vector2(pointerPosition.x - transform.position.x, 0f).normalized;
+		}
+
+		private bool IsPointerInsideDeadzone(Vector2 pointerPosition) {
+			return Mathf.Abs(pointerPosition.x - transform.position.x) <= deadzoneSize / 2.0f;
 		}
 
 		private void OnPointerRelease() {
