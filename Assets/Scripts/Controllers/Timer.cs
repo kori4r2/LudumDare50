@@ -3,46 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
-    [System.Serializable]
     public class Timer {
-        [SerializeField] private float maxTime;
-        private BoolVariable isPlaying;
-        private VariableObserver<bool> isPlayingObserver;
-        [SerializeField] private FloatVariable timeVariable;
-        public float CurrentTime => timeVariable.Value;
+        private float duration;
+        private float timeLeft;
+        public float TimeLeft => timeLeft;
+        public bool IsDone => timeLeft <= 0f;
 
-        public void Setup(BoolVariable isPlayingReference) {
-            isPlaying = isPlayingReference;
-            isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
+        public Timer(float duration) {
+            this.duration = duration;
+            timeLeft = 0f;
         }
 
-        private void OnGameStateChanged(bool newIsPlaying) {
-            if(newIsPlaying)
-                timeVariable.Value = maxTime;
+        public void StartTimer() {
+            timeLeft = duration;
+        }
+
+        public void StopTimer() {
+            timeLeft = 0f;
         }
 
         public void UpdateTimer(float deltaTime) {
-            if(!isPlaying.Value)
+            if(IsDone)
                 return;
 
-            timeVariable.Value -= deltaTime;
-            CheckGameEnd();
-        }
-
-        private void CheckGameEnd() {
-            if (timeVariable.Value > float.Epsilon)
-                return;
-
-            timeVariable.Value = 0f;
-            isPlaying.Value = false;
-        }
-
-        public void OnEnable() {
-            isPlayingObserver?.StartWatching();
-        }
-
-        public void OnDisable() {
-            isPlayingObserver?.StopWatching();
+            timeLeft -= deltaTime;
+            if(timeLeft <= 0f){
+                timeLeft = 0f;
+            }
         }
     }
 }

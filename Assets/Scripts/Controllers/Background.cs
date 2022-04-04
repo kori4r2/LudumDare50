@@ -6,7 +6,7 @@ using UnityEngine;
 namespace LudumDare50 {
     public class Background : MonoBehaviour {
         [SerializeField] private BoolVariable isPlaying;
-        [SerializeField] private Timer timer;
+        [SerializeField] private GameTimer timer;
 
         private void Awake() {
             timer.Setup(isPlaying);

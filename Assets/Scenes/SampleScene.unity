@@ -369,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561bfa4c95282bf03aa07fa310e2f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 2
   starPool: {fileID: 879461806}
   placementCalculator:
     mainCamera: {fileID: 519420031}

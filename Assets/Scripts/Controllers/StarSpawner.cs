@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace LudumDare50 {
     public class StarSpawner : MonoBehaviour {
+        [SerializeField] private float respawnTime;
+        private Timer respawnTimer;
         [SerializeField] private StarPool starPool;
         [SerializeField] private StarPlacementCalculator placementCalculator;
         [SerializeField] private StarEvent starDespawnedEvent;
@@ -16,9 +18,10 @@ namespace LudumDare50 {
         private bool CanSpawnStar => StarCount < placementCalculator.MaxNStars;
 
         private void Awake() {
+            respawnTimer = new Timer(respawnTime);
             placementCalculator.Setup(starPool.PoolSize);
             isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
-            starDespawnedEventListener = new GenericEventListener<Star>(starDespawnedEvent, RemoveStarFromHashSet);
+            starDespawnedEventListener = new GenericEventListener<Star>(starDespawnedEvent, RemoveStarAndCheckRespawn);
         }
 
         private void OnGameStateChanged(bool newIsPlaying) {
@@ -26,6 +29,7 @@ namespace LudumDare50 {
                 SpawnAllStars();
             } else {
                 ReturnAllStarsToPool();
+                respawnTimer.StopTimer();
             }
         }
 
@@ -51,8 +55,28 @@ namespace LudumDare50 {
             starsSpawned.Clear();
         }
 
-        private void RemoveStarFromHashSet(Star starDespawned) {
+        private void RemoveStarAndCheckRespawn(Star starDespawned) {
             starsSpawned.Remove(starDespawned);
+            CheckForRespawn();
+        }
+
+        private void Update() {
+            if (!isPlaying.Value || !CanSpawnStar)
+                return;
+
+            if (!respawnTimer.IsDone) {
+                respawnTimer.UpdateTimer(Time.deltaTime);
+                return;
+            }
+
+            SpawnNewStar();
+            CheckForRespawn();
+        }
+
+        private void CheckForRespawn() {
+            if (CanSpawnStar && respawnTimer.IsDone) {
+                respawnTimer.StartTimer();
+            }
         }
 
         private void OnEnable() {
