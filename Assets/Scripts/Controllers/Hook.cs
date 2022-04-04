@@ -100,6 +100,8 @@ namespace LudumDare50 {
             Star star = starsRuntimeSet.GetActiveElement(otherObject);
             if (star == null)
                 return;
+
+            ignoreTriggers = true;
             StopHookMovement();
             hitStarEvent?.Raise(star);
             StartCoroutine(DebugAutoReturnCoroutine());

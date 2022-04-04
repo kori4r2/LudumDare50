@@ -28,6 +28,7 @@ namespace LudumDare50 {
         public void SetVelocity(Vector2 newVelocity) {
             if(!CanMove)
                 return;
+
             shouldUpdateVelocity = true;
             currentVelocity = newVelocity;
         }

@@ -24,14 +24,15 @@ namespace LudumDare50 {
         public void UpdateTimer(float deltaTime) {
             if(!isPlaying.Value)
                 return;
+
             timeVariable.Value -= deltaTime;
             CheckGameEnd();
         }
 
         private void CheckGameEnd() {
-            if (timeVariable.Value > float.Epsilon) {
+            if (timeVariable.Value > float.Epsilon)
                 return;
-            }
+
             timeVariable.Value = 0f;
             isPlaying.Value = false;
         }

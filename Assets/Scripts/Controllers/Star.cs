@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace LudumDare50 {
@@ -8,9 +9,14 @@ namespace LudumDare50 {
         [SerializeField] private BoolVariable isPlaying;
         [SerializeField] private StarRuntimeSet runtimeSet;
         [SerializeField] private StarEvent despawnedStarEvent;
+        [SerializeField] private Collider2D collisionTrigger;
 
         private void Awake() {
             tag = starTag;
+        }
+
+        public void Init() {
+            collisionTrigger.enabled = true;
         }
 
         private void OnEnable() {
@@ -19,16 +25,27 @@ namespace LudumDare50 {
 
         private void OnDisable() {
             runtimeSet.RemoveElement(this);
+            StopAllCoroutines();
         }
 
         public void FadeOut() {
-            if (!isPlaying.Value) {
+            if (!isPlaying.Value)
                 return;
-            }
+
             currentTime.Value += timeGain;
+            collisionTrigger.enabled = false;
+            StartCoroutine(DebugDespawnAfterTimeCoroutine());
+        }
+
+        private IEnumerator DebugDespawnAfterTimeCoroutine() {
+            yield return new WaitForSeconds(0.5f);
+            Despawn();
         }
 
         public void Despawn() {
+            if (!isPlaying.Value)
+                return;
+
             despawnedStarEvent?.Raise(this);
         }
     }
