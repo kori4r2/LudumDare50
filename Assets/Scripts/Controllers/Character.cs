@@ -21,6 +21,7 @@ namespace LudumDare50 {
         private bool isMoving = false;
 
         private void Awake() {
+            tag = characterTag;
             canMove.Value = true;
 			SetInputProcessorCallbacks();
             canMoveObserver = new VariableObserver<bool>(canMove, OnCanMoveChanged);
