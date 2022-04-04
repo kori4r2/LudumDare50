@@ -81,8 +81,9 @@ MonoBehaviour:
     movableRigidbody: {fileID: 349477624079235592}
   moveSpeed: 5
   deadzoneSize: 0.5
-  canMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
   characterCollider: {fileID: 6398844497354156259}
+  canMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
+  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
   hook: {fileID: 8450827318040720280}
 --- !u!61 &6398844497354156259
 BoxCollider2D:

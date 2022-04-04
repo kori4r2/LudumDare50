@@ -46,6 +46,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GameUI",
+            "id": "b908cef9-2972-45bd-b6ba-07c4946ef42b",
+            "actions": [
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "3cfb0770-cd47-4144-bb82-92b34e82b7e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Position",
+                    "type": "PassThrough",
+                    "id": "f6621ea9-2b5a-47a1-8482-80e47d088694",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4eba70f3-6dc2-4827-a9d6-9410b08c7979",
+                    "path": "<Pointer>/press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Pointer",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e083eaca-f349-46be-9d5a-c8e90d505e34",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pointer",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

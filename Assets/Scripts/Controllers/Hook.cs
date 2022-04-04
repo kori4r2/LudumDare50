@@ -23,8 +23,7 @@ namespace LudumDare50 {
 
         private void Awake() {
             hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
-            StopHookMovement();
-            startingPosition = transform.localPosition;
+            HideHook();
         }
 
         private void ReturnHook() {

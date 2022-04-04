@@ -8,9 +8,10 @@ namespace LudumDare50 {
         [SerializeField] private Movable2D movable2D;
         [SerializeField, Range(0f, 20f)] private float moveSpeed;
         [SerializeField, Range(0f, 1f)] private float deadzoneSize;
-        [SerializeField] private BoolVariable canMove;
-        private VariableObserver<bool> canMoveObserver;
         [SerializeField] private Collider2D characterCollider;
+        [SerializeField] private BoolVariable canMove;
+        [SerializeField] private BoolVariable isPlaying;
+        private VariableObserver<bool> canMoveObserver;
         [Header("Hook")]
         [SerializeField] private Hook hook;
         public const string characterTag = "Character";
@@ -36,7 +37,7 @@ namespace LudumDare50 {
         }
 
 		private void OnPointerPress() {
-            if(!canMove.Value)
+            if(!isPlaying.Value || !canMove.Value)
                 return;
 
 			if (IsPointerOverCharacter()) {
