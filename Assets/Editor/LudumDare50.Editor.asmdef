@@ -1,8 +1,9 @@
 {
-    "name": "LudumDare50.Editor",
-    "rootNamespace": "LudumDare50.Editor",
+    "name": "LudumDare50.EditorScripts",
+    "rootNamespace": "LudumDare50.EditorScripts",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:3b246139c484af6739fdedf4b57b88de"
     ],
     "includePlatforms": [
         "Editor"

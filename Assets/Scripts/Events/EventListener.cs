@@ -7,6 +7,12 @@ namespace LudumDare50 {
         [SerializeField] private EventSO eventListened = null;
         [SerializeField] private UnityEvent eventCallback = new UnityEvent();
 
+        public EventListener(EventSO eventToListen, UnityAction response) {
+            eventListened = eventToListen;
+            eventCallback = new UnityEvent();
+            eventCallback.AddListener(response);
+        }
+
         public void OnEventRaised() {
             eventCallback?.Invoke();
         }

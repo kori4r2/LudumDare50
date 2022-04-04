@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
@@ -10,20 +9,41 @@ namespace LudumDare50 {
         [SerializeField] private Movable2D hookMovable;
         [SerializeField] private float throwSpeed;
         [SerializeField] private float returnSpeed;
-        [Header("References")]
+        [Header("Event References")]
+        [SerializeField] private StarEvent hitStarEvent;
+        [SerializeField] private EventSO pulledBackHook;
+        private EventListener hookPullBackListener;
+        [Header("Other References")]
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private BoolVariable canCharacterMove;
+        [SerializeField] private StarRuntimeSet starsRuntimeSet;
         private Vector3 startingPosition;
         public bool IsAiming { get; private set; } = false;
+        private bool ignoreTriggers = true;
 
         private void Awake() {
+            hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
             StopHookMovement();
             startingPosition = transform.localPosition;
+        }
+
+        private void ReturnHook() {
+            ignoreTriggers = true;
+            hookMovable.AllowDynamicMovement();
+            hookMovable.SetVelocity(-aimCalculator.ThrowDirection * returnSpeed);
         }
 
         private void StopHookMovement() {
             hookMovable.AllowKinematicMovement();
             hookMovable.SetVelocity(Vector2.zero);
+        }
+
+        private void OnEnable() {
+            hookPullBackListener?.StartListeningEvent();
+        }
+
+        private void OnDisable() {
+            hookPullBackListener?.StopListeningEvent();
         }
 
         private void Update() {
@@ -49,7 +69,7 @@ namespace LudumDare50 {
         public void ThrowHook() {
             StartHookMovement();
             IsAiming = false;
-            StartCoroutine(DebugAutoReturnCoroutine());
+            ignoreTriggers = false;
         }
 
         private void StartHookMovement() {
@@ -57,20 +77,43 @@ namespace LudumDare50 {
             hookMovable.SetVelocity(aimCalculator.ThrowDirection * throwSpeed);
         }
 
-        private IEnumerator DebugAutoReturnCoroutine() {
-            yield return new WaitForSeconds(1f);
-            ReturnHook();
-        }
-
-        private void ReturnHook() {
-            hookMovable.SetVelocity(-aimCalculator.ThrowDirection * returnSpeed);
-        }
-
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject.CompareTag(Character.characterTag)) {
+            GameObject otherObject = collision.gameObject;
+            if(otherObject.CompareTag(Character.characterTag)) {
                 HideHook();
                 canCharacterMove.Value = true;
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider) {
+            if(ignoreTriggers)
+                return;
+
+            GameObject otherObject = collider.gameObject;
+            if(otherObject.CompareTag(Star.starTag)) {
+                OnStarCollision(otherObject);
+            } else if(otherObject.CompareTag(Bounds.boundsTag)) {
+                OnBoundsCollision();
+            }
+        }
+
+        private void OnStarCollision(GameObject otherObject) {
+            Star star = starsRuntimeSet.GetActiveElement(otherObject);
+            if (star == null)
+                return;
+            StopHookMovement();
+            hitStarEvent?.Raise(star);
+            StartCoroutine(DebugAutoReturnCoroutine());
+        }
+
+        private IEnumerator DebugAutoReturnCoroutine() {
+            yield return new WaitForSeconds(.5f);
+            pulledBackHook?.Raise();
+        }
+
+        private void OnBoundsCollision() {
+            StopHookMovement();
+            pulledBackHook?.Raise();
         }
 
         private void HideHook() {
