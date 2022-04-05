@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
     [System.Serializable]
     public class GameTimer {
-        [SerializeField] private float maxTime;
+        private float maxTime;
         private BoolVariable isPlaying;
         private VariableObserver<bool> isPlayingObserver;
         [SerializeField] private FloatVariable timeVariable;
         public float CurrentTime => timeVariable.Value;
         public float CurrentProgress =>  Mathf.Clamp((maxTime - CurrentTime) / maxTime, 0f, 1f);
 
-        public void Setup(BoolVariable isPlayingReference) {
+        public void Setup(ActiveGameSettingsReference gameSettings, BoolVariable isPlayingReference) {
             isPlaying = isPlayingReference;
             isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
+            maxTime = gameSettings.MaxTime;
             timeVariable.Value = maxTime;
         }
 

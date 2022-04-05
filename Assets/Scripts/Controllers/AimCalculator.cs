@@ -3,8 +3,8 @@ using UnityEngine;
 namespace LudumDare50 {
     [System.Serializable]
     public class AimCalculator  {
-        [SerializeField, Range(0, 180)] private float swingAngle;
-        [SerializeField, Tooltip("Angles per second")] private float swingingSpeed;
+        private float swingAngle;
+        private float swingingSpeed;
         private float aimTime;
         private float QuarterPeriod => (swingAngle / 2.0f) / swingingSpeed;
         private int tIndex => Mathf.FloorToInt(aimTime / QuarterPeriod) % 4;
@@ -19,6 +19,11 @@ namespace LudumDare50 {
                     _ => Vector2.zero
                 };
             }
+        }
+
+        public AimCalculator(ActiveGameSettingsReference gameSettings) {
+            swingAngle = gameSettings.HookAimAngle;
+            swingingSpeed = gameSettings.HookSwingingSpeed;
         }
 
         public void StartSwinging() {

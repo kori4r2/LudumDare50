@@ -4,11 +4,13 @@ using UnityEngine;
 namespace LudumDare50 {
     [RequireComponent(typeof(Collider2D))]
     public class Hook : MonoBehaviour {
-        [SerializeField] private AimCalculator aimCalculator;
+        [Header("Settings")]
+        [SerializeField] private ActiveGameSettingsReference gameSettings;
+        private AimCalculator aimCalculator;
         [Header("Movement")]
         [SerializeField] private Movable2D hookMovable;
-        [SerializeField] private float throwSpeed;
-        [SerializeField] private float returnSpeed;
+        private float ThrowSpeed => gameSettings.HookThrowSpeed;
+        private float ReturnSpeed => gameSettings.HookReturnSpeed;
         [Header("Event References")]
         [SerializeField] private StarEvent hitStarEvent;
         [SerializeField] private EventSO pulledBackHook;
@@ -22,6 +24,7 @@ namespace LudumDare50 {
         private bool ignoreTriggers = true;
 
         private void Awake() {
+            aimCalculator = new AimCalculator(gameSettings);
             hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
             HideHook();
         }
@@ -29,7 +32,7 @@ namespace LudumDare50 {
         private void ReturnHook() {
             ignoreTriggers = true;
             hookMovable.AllowDynamicMovement();
-            hookMovable.SetVelocity(-aimCalculator.ThrowDirection * returnSpeed);
+            hookMovable.SetVelocity(-aimCalculator.ThrowDirection * ReturnSpeed);
         }
 
         private void StopHookMovement() {
@@ -73,7 +76,7 @@ namespace LudumDare50 {
 
         private void StartHookMovement() {
             hookMovable.AllowDynamicMovement();
-            hookMovable.SetVelocity(aimCalculator.ThrowDirection * throwSpeed);
+            hookMovable.SetVelocity(aimCalculator.ThrowDirection * ThrowSpeed);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {

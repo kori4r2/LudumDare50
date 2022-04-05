@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8cb704d619404fcb5895e3d6ce48b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGain: 3
+  gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
   currentTime: {fileID: 11400000, guid: 47d9c79866bfa9f8a91721f0175bcb12, type: 2}
   isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
   runtimeSet: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}

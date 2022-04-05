@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2d9117473c0a364865273f059034c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
   pointerInputProcessor:
     pointerPressAction: {fileID: -5585333772637410564, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
     pointerPositionAction: {fileID: -2673544153465511000, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
@@ -79,8 +80,6 @@ MonoBehaviour:
         m_Calls: []
   movable2D:
     movableRigidbody: {fileID: 349477624079235592}
-  moveSpeed: 5
-  deadzoneSize: 0.5
   characterCollider: {fileID: 6398844497354156259}
   canMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
   isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}

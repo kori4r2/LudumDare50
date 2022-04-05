@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace LudumDare50 {
     public class StarSpawner : MonoBehaviour {
-        [SerializeField] private float respawnTime;
+        [SerializeField] private ActiveGameSettingsReference gameSettings;
+        private float RespawnTime => gameSettings.StarsRespawnTime;
         private Timer respawnTimer;
         [SerializeField] private StarPool starPool;
         [SerializeField] private StarPlacementCalculator placementCalculator;
@@ -18,8 +19,8 @@ namespace LudumDare50 {
         private bool CanSpawnStar => StarCount < placementCalculator.MaxNStars;
 
         private void Awake() {
-            respawnTimer = new Timer(respawnTime);
-            placementCalculator.Setup(starPool.PoolSize, starsSpawned);
+            respawnTimer = new Timer(RespawnTime);
+            placementCalculator.Setup(gameSettings, starPool.PoolSize, starsSpawned);
             isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
             starDespawnedEventListener = new GenericEventListener<Star>(starDespawnedEvent, RemoveStarAndCheckRespawn);
         }

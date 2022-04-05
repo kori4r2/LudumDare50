@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
     public class Background : MonoBehaviour {
+        [SerializeField] private ActiveGameSettingsReference gameSettings;
         [SerializeField] private BoolVariable isPlaying;
         [SerializeField] private GameTimer timer;
         private float maxMaterialOffset => 0.8f;
@@ -17,7 +15,7 @@ namespace LudumDare50 {
         private const string shaderPropertyName = "SkyOffset";
 
         private void Awake() {
-            timer.Setup(isPlaying);
+            timer.Setup(gameSettings, isPlaying);
             lastUsedOffset = 0f;
         }
 

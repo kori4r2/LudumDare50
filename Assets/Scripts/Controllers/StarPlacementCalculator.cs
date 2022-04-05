@@ -7,15 +7,16 @@ namespace LudumDare50 {
     [System.Serializable]
     public class StarPlacementCalculator {
         [SerializeField] private Camera mainCamera;
-        [SerializeField, Range(0f, 50f)] private float spaceBetweenStars = 25f;
+        private float spaceBetweenStars;
         private RuntimeSet<Star> stars;
         private Rect spawnArea = Rect.zero;
         private IStarSpreader starSpreader;
         public int MaxNStars { get; private set; }
         private const int maxLoopSteps = 50;
 
-        public void Setup(int starPoolSize, RuntimeSet<Star> starsRuntimeSet) {
+        public void Setup(ActiveGameSettingsReference gameSettings, int starPoolSize, RuntimeSet<Star> starsRuntimeSet) {
             stars = starsRuntimeSet;
+            spaceBetweenStars = gameSettings.SpaceBetweenStars;
             UpdateSpawnArea();
             CalculateMaxStars(starPoolSize);
             starSpreader = new SpreadFromRandomCircle();

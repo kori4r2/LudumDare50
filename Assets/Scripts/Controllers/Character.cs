@@ -2,12 +2,14 @@ using UnityEngine;
 
 namespace LudumDare50 {
     public class Character : MonoBehaviour {
+        [Header("Settings")]
+        [SerializeField] private ActiveGameSettingsReference gameSettings;
         [Header("Input")]
         [SerializeField] private PointerInputProcessor pointerInputProcessor;
         [Header("Movement")]
         [SerializeField] private Movable2D movable2D;
-        [SerializeField, Range(0f, 20f)] private float moveSpeed;
-        [SerializeField, Range(0f, 1f)] private float deadzoneSize;
+        private float MoveSpeed => gameSettings.CharacterMoveSpeed;
+        private float DeadzoneSize => gameSettings.MovementDeadzoneSize;
         [SerializeField] private Collider2D characterCollider;
         [SerializeField] private BoolVariable canMove;
         [SerializeField] private BoolVariable isPlaying;
@@ -58,7 +60,7 @@ namespace LudumDare50 {
 		private void MoveCharacterTowardsPointer() {
 			Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
 			Vector2 direction = GetDirectionToPointer(pointerPosition);
-			movable2D.SetVelocity(direction * moveSpeed);
+			movable2D.SetVelocity(direction * MoveSpeed);
 		}
 
 		private Vector2 GetDirectionToPointer(Vector2 pointerPosition) {
@@ -69,7 +71,7 @@ namespace LudumDare50 {
 		}
 
 		private bool IsPointerInsideDeadzone(Vector2 pointerPosition) {
-			return Mathf.Abs(pointerPosition.x - transform.position.x) <= deadzoneSize / 2.0f;
+			return Mathf.Abs(pointerPosition.x - transform.position.x) <= DeadzoneSize / 2.0f;
 		}
 
 		private void OnPointerRelease() {

@@ -4,7 +4,8 @@ using UnityEngine;
 namespace LudumDare50 {
     public class Star : MonoBehaviour {
         public const string starTag = "Star";
-        [SerializeField] private float timeGain;
+        [SerializeField] private ActiveGameSettingsReference gameSettings;
+        private float TimeGain => gameSettings.StarTimeGain;
         [SerializeField] private FloatVariable currentTime;
         [SerializeField] private BoolVariable isPlaying;
         [SerializeField] private StarRuntimeSet runtimeSet;
@@ -32,7 +33,7 @@ namespace LudumDare50 {
             if (!isPlaying.Value)
                 return;
 
-            currentTime.Value += timeGain;
+            currentTime.Value += TimeGain;
             collisionTrigger.enabled = false;
             StartCoroutine(DebugDespawnAfterTimeCoroutine());
         }
