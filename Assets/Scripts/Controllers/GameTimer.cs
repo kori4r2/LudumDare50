@@ -10,10 +10,12 @@ namespace LudumDare50 {
         private VariableObserver<bool> isPlayingObserver;
         [SerializeField] private FloatVariable timeVariable;
         public float CurrentTime => timeVariable.Value;
+        public float CurrentProgress =>  Mathf.Clamp((maxTime - CurrentTime) / maxTime, 0f, 1f);
 
         public void Setup(BoolVariable isPlayingReference) {
             isPlaying = isPlayingReference;
             isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
+            timeVariable.Value = maxTime;
         }
 
         private void OnGameStateChanged(bool newIsPlaying) {
