@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
   timer:
-    maxTime: 30
+    maxTime: 60
     timeVariable: {fileID: 11400000, guid: 47d9c79866bfa9f8a91721f0175bcb12, type: 2}
   backgroundShaderMaterial: {fileID: 2100000, guid: 06dfa7411076e5cbd8533f69be86aad1, type: 2}
   gameplaySmoothing: 0.9
