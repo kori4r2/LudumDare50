@@ -17,6 +17,12 @@ namespace LudumDare50 {
         public IEnumerator<T> GetEnumerator() {
             return activeObjectsHashSet.GetEnumerator();
         }
+
+        public T[] ToArray() {
+            T[] array = new T[Count];
+            activeObjectsHashSet.CopyTo(array);
+            return array;
+        }
         #endregion
 
         public bool Contains(T element) {

@@ -373,10 +373,10 @@ MonoBehaviour:
   starPool: {fileID: 879461806}
   placementCalculator:
     mainCamera: {fileID: 519420031}
-    spaceBetweenStars: 25
-    emptySpaceMultiplier: 1
+    spaceBetweenStars: 6
   starDespawnedEvent: {fileID: 11400000, guid: 31b4f1411c962d580a1a8c80b1162bfa, type: 2}
   isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  starsSpawned: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
 --- !u!1001 &349477623973221323
 PrefabInstance:
   m_ObjectHideFlags: 0
