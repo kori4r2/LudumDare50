@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace LudumDare50 {
@@ -13,6 +14,8 @@ namespace LudumDare50 {
         [SerializeField] private Collider2D characterCollider;
         [SerializeField] private BoolVariable canMove;
         [SerializeField] private BoolVariable isPlaying;
+        [SerializeField] private EventSO cameraChangeEvent;
+        private EventListener camerachangeEventListener;
         private VariableObserver<bool> canMoveObserver;
         [Header("Hook")]
         [SerializeField] private Hook hook;
@@ -25,18 +28,13 @@ namespace LudumDare50 {
             canMove.Value = true;
 			SetInputProcessorCallbacks();
             canMoveObserver = new VariableObserver<bool>(canMove, OnCanMoveChanged);
+            camerachangeEventListener = new EventListener(cameraChangeEvent, StayWithinCameraLimits);
 		}
 
-		private void SetInputProcessorCallbacks() {
+        private void SetInputProcessorCallbacks() {
 			pointerInputProcessor.OnPress.AddListener(OnPointerPress);
 			pointerInputProcessor.OnRelease.AddListener(OnPointerRelease);
 		}
-
-        private void OnCanMoveChanged(bool newCanMoveValue) {
-            if (!newCanMoveValue) {
-                movable2D.BlockMovement();
-            }
-        }
 
 		private void OnPointerPress() {
             if(!isPlaying.Value || !canMove.Value)
@@ -84,6 +82,40 @@ namespace LudumDare50 {
             isMoving = false;
         }
 
+        private void OnCanMoveChanged(bool newCanMoveValue) {
+            if (!newCanMoveValue) {
+                movable2D.BlockMovement();
+            }
+        }
+
+        private void StayWithinCameraLimits() {
+            Vector2 currentPosition = transform.position;
+            Vector2 minPosition = CalculateMinCharacterPosition();
+            Vector2 maxPosition = CalculateMaxCharacterPosition();
+            if (CameraUtils.IsInsideLimits(currentPosition, minPosition, maxPosition))
+                return;
+
+            ClampCurrentPosition(currentPosition, minPosition, maxPosition);
+        }
+
+        private Vector2 CalculateMinCharacterPosition() {
+            Vector2 minPosition = CameraUtils.GetWorldSpaceCameraMinPosition(pointerInputProcessor.MainCamera);
+            minPosition.x += DeadzoneSize / 2f;
+            return minPosition;
+        }
+
+        private Vector2 CalculateMaxCharacterPosition() {
+            Vector2 maxPosition = CameraUtils.GetWorldSpaceCameraMaxPosition(pointerInputProcessor.MainCamera);
+            maxPosition.x -= DeadzoneSize / 2f;
+            return maxPosition;
+        }
+
+        private void ClampCurrentPosition(Vector2 currentPosition, Vector2 minPosition, Vector2 maxPosition) {
+            float newPositionX = Mathf.Clamp(currentPosition.x, minPosition.x, maxPosition.x);
+            float newPositionY = Mathf.Clamp(currentPosition.y, minPosition.y, maxPosition.y);
+            transform.position = new Vector3(newPositionX, newPositionY, transform.position.z);
+        }
+
         private void Update() {
             if(!isMoving)
                 return;
@@ -94,11 +126,13 @@ namespace LudumDare50 {
         private void OnEnable() {
             pointerInputProcessor.Enable();
             canMoveObserver.StartWatching();
+            camerachangeEventListener.StartListeningEvent();
         }
 
         private void OnDisable() {
             pointerInputProcessor.Disable();
             canMoveObserver.StopWatching();
+            camerachangeEventListener.StopListeningEvent();
         }
 
         private void FixedUpdate() {

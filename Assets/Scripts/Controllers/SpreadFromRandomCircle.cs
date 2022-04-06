@@ -5,7 +5,6 @@ using UnityEngine;
 namespace LudumDare50 {
     public class SpreadFromRandomCircle : IStarSpreader {
         private Rect rectangularArea;
-        private const float border = 2f;
         public Vector3 GetNewPosition() {
             Vector2 newPoint = MapCircleToSquare(Random.insideUnitCircle);
             newPoint.x *= rectangularArea.width / 2.0f;
@@ -16,8 +15,6 @@ namespace LudumDare50 {
 
         public void Setup(Rect area) {
             rectangularArea = area;
-            rectangularArea.width -= border;
-            rectangularArea.height -= border;
         }
 
         private static Vector2 MapCircleToSquare(Vector2 circlePosition) {

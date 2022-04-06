@@ -15,7 +15,7 @@ namespace LudumDare50 {
         [SerializeField] private UnityEvent onRelease = new UnityEvent();
         public UnityEvent OnRelease => onRelease;
         private Camera mainCamera = null;
-        private Camera MainCamera {
+        public Camera MainCamera {
             get{
                 mainCamera ??= Camera.main;
                 return mainCamera;
