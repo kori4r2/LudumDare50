@@ -81,20 +81,20 @@ namespace LudumDare50 {
 
         private void OnCollisionEnter2D(Collision2D collision) {
             GameObject otherObject = collision.gameObject;
-            if(otherObject.CompareTag(Character.characterTag)) {
+            if (otherObject.CompareTag(Character.characterTag)) {
                 HideHook();
                 canCharacterMove.Value = true;
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collider) {
-            if(ignoreTriggers)
+            if (ignoreTriggers)
                 return;
 
             GameObject otherObject = collider.gameObject;
-            if(otherObject.CompareTag(Star.starTag)) {
+            if (otherObject.CompareTag(Star.starTag)) {
                 OnStarCollision(otherObject);
-            } else if(otherObject.CompareTag(Bounds.boundsTag)) {
+            } else if (otherObject.CompareTag(Bounds.boundsTag)) {
                 OnBoundsCollision();
             }
         }

@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LudumDare50
-{
+namespace LudumDare50 {
     public class Bounds : MonoBehaviour {
         #region Static Variables and Properties
         private static Vector2 FirstCorner => new Vector2(-1, 1);
         private static Vector2 SecondCorner => new Vector2(-1, -1);
         private static Vector2 ThirdCorner => new Vector2(1, -1);
         private static Vector2 FourthCorner => new Vector2(1, 1);
-        private static Vector2[] defaultColliderPoints  = null;
+        private static Vector2[] defaultColliderPoints = null;
         private static Vector2[] DefaultColliderPoints {
-            get{
+            get {
                 defaultColliderPoints ??= new Vector2[] { FirstCorner, SecondCorner, ThirdCorner, FourthCorner, FirstCorner };
                 return defaultColliderPoints;
             }

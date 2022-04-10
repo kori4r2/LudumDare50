@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
-    public abstract class RuntimeSet<T> : ScriptableObject, IEnumerable<T> where T : MonoBehaviour{
+    public abstract class RuntimeSet<T> : ScriptableObject, IEnumerable<T> where T : MonoBehaviour {
         private Dictionary<GameObject, T> activeObjsDictionary = new Dictionary<GameObject, T>();
         private HashSet<T> activeObjectsHashSet = new HashSet<T>();
 
         public int Count => activeObjectsHashSet.Count;
 
-		#region IEnumerable
+        #region IEnumerable
         IEnumerator IEnumerable.GetEnumerator() {
             return activeObjectsHashSet.GetEnumerator();
         }
-        
+
         public IEnumerator<T> GetEnumerator() {
             return activeObjectsHashSet.GetEnumerator();
         }
@@ -30,11 +30,11 @@ namespace LudumDare50 {
         }
 
         public void AddElement(T newElement) {
-            if(Contains(newElement))
+            if (Contains(newElement))
                 return;
 
-			GameObject newElementObj = newElement.gameObject;
-            if(activeObjsDictionary.ContainsKey(newElementObj)) {
+            GameObject newElementObj = newElement.gameObject;
+            if (activeObjsDictionary.ContainsKey(newElementObj)) {
                 Debug.LogWarning($"RuntimeSet {name} already contains an element from object {newElementObj}", this);
                 return;
             }
@@ -44,7 +44,7 @@ namespace LudumDare50 {
         }
 
         public void RemoveElement(T elementToRemove) {
-            if(!Contains(elementToRemove))
+            if (!Contains(elementToRemove))
                 return;
 
             GameObject elementObj = elementToRemove.gameObject;
@@ -53,7 +53,7 @@ namespace LudumDare50 {
         }
 
         public T GetActiveElement(GameObject gameObj) {
-            if(!activeObjsDictionary.ContainsKey(gameObj))
+            if (!activeObjsDictionary.ContainsKey(gameObj))
                 return null;
 
             return activeObjsDictionary[gameObj];

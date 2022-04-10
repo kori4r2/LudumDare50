@@ -8,7 +8,7 @@ namespace LudumDare50 {
         private VariableObserver<bool> isPlayingObserver;
         [SerializeField] private FloatVariable timeVariable;
         public float CurrentTime => timeVariable.Value;
-        public float CurrentProgress =>  Mathf.Clamp((maxTime - CurrentTime) / maxTime, 0f, 1f);
+        public float CurrentProgress => Mathf.Clamp((maxTime - CurrentTime) / maxTime, 0f, 1f);
 
         public void Setup(ActiveGameSettingsReference gameSettings, BoolVariable isPlayingReference) {
             isPlaying = isPlayingReference;
@@ -18,12 +18,12 @@ namespace LudumDare50 {
         }
 
         private void OnGameStateChanged(bool newIsPlaying) {
-            if(newIsPlaying)
+            if (newIsPlaying)
                 timeVariable.Value = maxTime;
         }
 
         public void UpdateTimer(float deltaTime) {
-            if(!isPlaying.Value)
+            if (!isPlaying.Value)
                 return;
 
             timeVariable.Value -= deltaTime;

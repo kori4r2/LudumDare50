@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
@@ -33,7 +30,7 @@ namespace LudumDare50 {
         }
 
         private void OnGameStateChanged(bool newIsPlaying) {
-            if(newIsPlaying) {
+            if (newIsPlaying) {
                 SpawnAllStars();
             } else {
                 ReturnAllStarsToPool();
@@ -42,13 +39,13 @@ namespace LudumDare50 {
         }
 
         private void SpawnAllStars() {
-            while(CanSpawnStar) {
+            while (CanSpawnStar) {
                 SpawnNewStar();
             }
         }
 
         private void SpawnNewStar() {
-            if(!CanSpawnStar)
+            if (!CanSpawnStar)
                 return;
 
             Vector3 newPosition = placementCalculator.GetNextStarPosition();
@@ -56,7 +53,7 @@ namespace LudumDare50 {
         }
 
         private void ReturnAllStarsToPool() {
-            foreach(Star star in starsSpawned.ToArray()) {
+            foreach (Star star in starsSpawned.ToArray()) {
                 starPool.ReturnStarToPool(star);
             }
         }
@@ -79,8 +76,8 @@ namespace LudumDare50 {
 
         private void RemoveStarsOutsideSpawnArea() {
             Rect spawnArea = placementCalculator.SpawnArea;
-            foreach(Star star in starsSpawned.ToArray()) {
-                if(CameraUtils.IsInsideLimits(star.transform.position, spawnArea.min, spawnArea.max))
+            foreach (Star star in starsSpawned.ToArray()) {
+                if (CameraUtils.IsInsideLimits(star.transform.position, spawnArea.min, spawnArea.max))
                     continue;
 
                 starPool.ReturnStarToPool(star);

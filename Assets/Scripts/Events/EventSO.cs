@@ -2,26 +2,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LudumDare50 {
-    [CreateAssetMenu(menuName="Events/VoidEvent")]
-	public class EventSO : ScriptableObject {
-		private List<IEventListener> listeners = new List<IEventListener>();
+    [CreateAssetMenu(menuName = "Events/VoidEvent")]
+    public class EventSO : ScriptableObject {
+        private List<IEventListener> listeners = new List<IEventListener>();
 
-		public void AddListener(IEventListener newListener) {
-			if(!listeners.Contains(newListener)) {
-				listeners.Add(newListener);
-			}
-		}
+        public void AddListener(IEventListener newListener) {
+            if (!listeners.Contains(newListener)) {
+                listeners.Add(newListener);
+            }
+        }
 
-		public void RemoveListener(IEventListener newListener) {
-			if(listeners.Contains(newListener)) {
-				listeners.Remove(newListener);
-			}
-		}
+        public void RemoveListener(IEventListener newListener) {
+            if (listeners.Contains(newListener)) {
+                listeners.Remove(newListener);
+            }
+        }
 
-		public void Raise() {
-			foreach(IEventListener listener in listeners) {
-				listener?.OnEventRaised();
-			}
-		}
-	}
+        public void Raise() {
+            foreach (IEventListener listener in listeners) {
+                listener?.OnEventRaised();
+            }
+        }
+    }
 }

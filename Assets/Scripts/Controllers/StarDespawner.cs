@@ -21,7 +21,7 @@ namespace LudumDare50 {
         }
 
         private void FadeoutSavedStar() {
-            if(!isPlaying.Value || !starToDespawn)
+            if (!isPlaying.Value || !starToDespawn)
                 return;
 
             starToDespawn.FadeOut();

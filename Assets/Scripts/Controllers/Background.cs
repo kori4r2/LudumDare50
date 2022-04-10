@@ -7,7 +7,7 @@ namespace LudumDare50 {
         [SerializeField] private GameTimer timer;
         private float maxMaterialOffset => 0.8f;
         private float minMaterialOffset => -1f;
-        private float currentMaterialOffset => minMaterialOffset + (maxMaterialOffset-minMaterialOffset) * timer.CurrentProgress;
+        private float currentMaterialOffset => minMaterialOffset + (maxMaterialOffset - minMaterialOffset) * timer.CurrentProgress;
         private float lastUsedOffset;
         [SerializeField] private Material backgroundShaderMaterial;
         [SerializeField, Range(0f, 0.95f)] private float gameplaySmoothing = 0.5f;
@@ -21,7 +21,7 @@ namespace LudumDare50 {
 
         private void Update() {
             timer.UpdateTimer(Time.deltaTime);
-            if(isPlaying.Value) {
+            if (isPlaying.Value) {
                 UpdateBackgroundWithSmoothing(gameplaySmoothing);
             } else {
                 UpdateBackgroundWithSmoothing(cutsceneSmoothing);

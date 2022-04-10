@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -74,13 +71,13 @@ namespace LudumDare50 {
             bool hasCloseStar = false;
             foreach (Star star in stars.ToArray()) {
                 float distance = Vector2.Distance(rolledPosition, star.transform.position);
-                if(distance >= spaceBetweenStars)
+                if (distance >= spaceBetweenStars)
                     continue;
 
-				hasCloseStar = true;
+                hasCloseStar = true;
                 minDistance = Mathf.Min(distance, minDistance);
             }
-            return hasCloseStar? minDistance : -1f;
+            return hasCloseStar ? minDistance : -1f;
         }
     }
 }

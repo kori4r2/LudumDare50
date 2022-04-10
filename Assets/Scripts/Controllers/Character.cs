@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace LudumDare50 {
@@ -26,54 +25,54 @@ namespace LudumDare50 {
         private void Awake() {
             tag = characterTag;
             canMove.Value = true;
-			SetInputProcessorCallbacks();
+            SetInputProcessorCallbacks();
             canMoveObserver = new VariableObserver<bool>(canMove, OnCanMoveChanged);
             camerachangeEventListener = new EventListener(cameraChangeEvent, StayWithinCameraLimits);
-		}
+        }
 
         private void SetInputProcessorCallbacks() {
-			pointerInputProcessor.OnPress.AddListener(OnPointerPress);
-			pointerInputProcessor.OnRelease.AddListener(OnPointerRelease);
-		}
+            pointerInputProcessor.OnPress.AddListener(OnPointerPress);
+            pointerInputProcessor.OnRelease.AddListener(OnPointerRelease);
+        }
 
-		private void OnPointerPress() {
-            if(!isPlaying.Value || !canMove.Value)
+        private void OnPointerPress() {
+            if (!isPlaying.Value || !canMove.Value)
                 return;
 
-			if (IsPointerOverCharacter()) {
+            if (IsPointerOverCharacter()) {
                 canMove.Value = false;
                 hook.StartAiming();
-			} else {
+            } else {
                 movable2D.AllowDynamicMovement();
                 isMoving = true;
-				MoveCharacterTowardsPointer();
-			}
-		}
+                MoveCharacterTowardsPointer();
+            }
+        }
 
-		private bool IsPointerOverCharacter() {
+        private bool IsPointerOverCharacter() {
             Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
-			return characterCollider.bounds.Contains(pointerPosition);
-		}
+            return characterCollider.bounds.Contains(pointerPosition);
+        }
 
-		private void MoveCharacterTowardsPointer() {
-			Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
-			Vector2 direction = GetDirectionToPointer(pointerPosition);
-			movable2D.SetVelocity(direction * MoveSpeed);
-		}
+        private void MoveCharacterTowardsPointer() {
+            Vector2 pointerPosition = pointerInputProcessor.PointerPosition;
+            Vector2 direction = GetDirectionToPointer(pointerPosition);
+            movable2D.SetVelocity(direction * MoveSpeed);
+        }
 
-		private Vector2 GetDirectionToPointer(Vector2 pointerPosition) {
-            if(IsPointerInsideDeadzone(pointerPosition))
+        private Vector2 GetDirectionToPointer(Vector2 pointerPosition) {
+            if (IsPointerInsideDeadzone(pointerPosition))
                 return Vector2.zero;
 
-			return new Vector2(pointerPosition.x - transform.position.x, 0f).normalized;
-		}
+            return new Vector2(pointerPosition.x - transform.position.x, 0f).normalized;
+        }
 
-		private bool IsPointerInsideDeadzone(Vector2 pointerPosition) {
-			return Mathf.Abs(pointerPosition.x - transform.position.x) <= DeadzoneSize / 2.0f;
-		}
+        private bool IsPointerInsideDeadzone(Vector2 pointerPosition) {
+            return Mathf.Abs(pointerPosition.x - transform.position.x) <= DeadzoneSize / 2.0f;
+        }
 
-		private void OnPointerRelease() {
-            if(hook.IsAiming){
+        private void OnPointerRelease() {
+            if (hook.IsAiming) {
                 hook.ThrowHook();
                 return;
             }
@@ -117,7 +116,7 @@ namespace LudumDare50 {
         }
 
         private void Update() {
-            if(!isMoving)
+            if (!isMoving)
                 return;
 
             MoveCharacterTowardsPointer();

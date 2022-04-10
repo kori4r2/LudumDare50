@@ -26,7 +26,7 @@ namespace LudumDare50 {
         }
 
         public void SetVelocity(Vector2 newVelocity) {
-            if(!CanMove)
+            if (!CanMove)
                 return;
 
             shouldUpdateVelocity = true;
@@ -38,7 +38,7 @@ namespace LudumDare50 {
         }
 
         private void UpdateVelocity() {
-            if(shouldUpdateVelocity) {
+            if (shouldUpdateVelocity) {
                 movableRigidbody.velocity = currentVelocity;
             }
             shouldUpdateVelocity = false;

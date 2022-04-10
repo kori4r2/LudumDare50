@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace LudumDare50 {
     public class Timer {
         private float duration;
@@ -23,11 +19,11 @@ namespace LudumDare50 {
         }
 
         public void UpdateTimer(float deltaTime) {
-            if(IsDone)
+            if (IsDone)
                 return;
 
             timeLeft -= deltaTime;
-            if(timeLeft <= 0f){
+            if (timeLeft <= 0f) {
                 timeLeft = 0f;
             }
         }

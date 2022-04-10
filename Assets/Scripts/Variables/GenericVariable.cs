@@ -16,19 +16,19 @@ namespace LudumDare50 {
         private List<IVariableObserver<T>> observers = new List<IVariableObserver<T>>();
 
         public void AddObserver(IVariableObserver<T> newObserver) {
-            if(!observers.Contains(newObserver)) {
+            if (!observers.Contains(newObserver)) {
                 observers.Add(newObserver);
             }
         }
 
         public void RemoveObserver(IVariableObserver<T> newObserver) {
-            if(observers.Contains(newObserver)) {
+            if (observers.Contains(newObserver)) {
                 observers.Remove(newObserver);
             }
         }
 
         private void NotifyObservers() {
-            foreach(IVariableObserver<T> observer in observers) {
+            foreach (IVariableObserver<T> observer in observers) {
                 observer?.OnValueChanged(Value);
             }
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace LudumDare50 {
     [System.Serializable]
@@ -16,7 +16,7 @@ namespace LudumDare50 {
         public UnityEvent OnRelease => onRelease;
         private Camera mainCamera = null;
         public Camera MainCamera {
-            get{
+            get {
                 mainCamera ??= Camera.main;
                 return mainCamera;
             }
