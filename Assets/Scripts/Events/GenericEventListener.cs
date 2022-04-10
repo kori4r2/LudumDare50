@@ -18,11 +18,13 @@ namespace LudumDare50 {
         }
 
         public void StartListeningEvent() {
-            eventListened?.AddListener(this);
+            if (eventListened)
+                eventListened.AddListener(this);
         }
 
         public void StopListeningEvent() {
-            eventListened?.RemoveListener(this);
+            if (eventListened)
+                eventListened.RemoveListener(this);
         }
     }
 }

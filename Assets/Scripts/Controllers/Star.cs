@@ -44,10 +44,10 @@ namespace LudumDare50 {
         }
 
         public void Despawn() {
-            if (!isPlaying.Value)
+            if (!isPlaying.Value || !despawnedStarEvent)
                 return;
 
-            despawnedStarEvent?.Raise(this);
+            despawnedStarEvent.Raise(this);
         }
     }
 }

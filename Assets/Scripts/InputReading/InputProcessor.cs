@@ -17,7 +17,7 @@ namespace LudumDare50 {
         private Camera mainCamera = null;
         public Camera MainCamera {
             get {
-                mainCamera ??= Camera.main;
+                mainCamera = mainCamera ? mainCamera : Camera.main;
                 return mainCamera;
             }
         }

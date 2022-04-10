@@ -49,7 +49,7 @@ namespace LudumDare50 {
                 return;
 
             Vector3 newPosition = placementCalculator.GetNextStarPosition();
-            Star newStar = starPool.InstantiateStar(newPosition, Quaternion.identity);
+            starPool.InstantiateStar(newPosition, Quaternion.identity);
         }
 
         private void ReturnAllStarsToPool() {

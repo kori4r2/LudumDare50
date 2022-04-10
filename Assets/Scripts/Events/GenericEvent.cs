@@ -19,7 +19,8 @@ namespace LudumDare50 {
 
         public void Raise(T value) {
             foreach (IGenericEventListener<T> listener in listeners) {
-                listener?.OnEventRaised(value);
+                if (listener != null)
+                    listener.OnEventRaised(value);
             }
         }
     }

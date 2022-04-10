@@ -19,11 +19,13 @@ namespace LudumDare50 {
         }
 
         public void StartWatching() {
-            observedVariable?.AddObserver(this);
+            if (observedVariable)
+                observedVariable.AddObserver(this);
         }
 
         public void StopWatching() {
-            observedVariable?.RemoveObserver(this);
+            if (observedVariable)
+                observedVariable.RemoveObserver(this);
         }
     }
 }

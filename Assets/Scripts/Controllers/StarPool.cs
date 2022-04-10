@@ -33,8 +33,7 @@ namespace LudumDare50 {
             Star instantiatedStar = starQueue.Dequeue();
             instantiatedStar.Init();
             GameObject starObj = instantiatedStar.gameObject;
-            starObj.transform.position = position;
-            starObj.transform.rotation = rotation;
+            starObj.transform.SetPositionAndRotation(position, rotation);
             starObj.SetActive(true);
             return instantiatedStar;
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace LudumDare50 {
     public abstract class GenericVariable<T> : ScriptableObject {
+        private List<IVariableObserver<T>> observers = new List<IVariableObserver<T>>();
         [SerializeField] private T value;
 
         public T Value {
@@ -13,7 +14,12 @@ namespace LudumDare50 {
             }
         }
 
-        private List<IVariableObserver<T>> observers = new List<IVariableObserver<T>>();
+        private void NotifyObservers() {
+            foreach (IVariableObserver<T> observer in observers) {
+                if (observer != null)
+                    observer.OnValueChanged(Value);
+            }
+        }
 
         public void AddObserver(IVariableObserver<T> newObserver) {
             if (!observers.Contains(newObserver)) {
@@ -24,12 +30,6 @@ namespace LudumDare50 {
         public void RemoveObserver(IVariableObserver<T> newObserver) {
             if (observers.Contains(newObserver)) {
                 observers.Remove(newObserver);
-            }
-        }
-
-        private void NotifyObservers() {
-            foreach (IVariableObserver<T> observer in observers) {
-                observer?.OnValueChanged(Value);
             }
         }
     }

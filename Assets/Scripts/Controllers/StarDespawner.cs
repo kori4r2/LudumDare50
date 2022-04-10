@@ -17,7 +17,8 @@ namespace LudumDare50 {
         }
 
         private void SaveReferenceToStar(Star star) {
-            starToDespawn ??= star;
+            if (!starToDespawn)
+                starToDespawn = star;
         }
 
         private void FadeoutSavedStar() {

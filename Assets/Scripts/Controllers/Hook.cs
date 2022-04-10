@@ -106,18 +106,21 @@ namespace LudumDare50 {
 
             ignoreTriggers = true;
             StopHookMovement();
-            hitStarEvent?.Raise(star);
+            if (hitStarEvent)
+                hitStarEvent.Raise(star);
             StartCoroutine(DebugAutoReturnCoroutine());
         }
 
         private IEnumerator DebugAutoReturnCoroutine() {
             yield return new WaitForSeconds(.5f);
-            pulledBackHook?.Raise();
+            if (pulledBackHook)
+                pulledBackHook.Raise();
         }
 
         private void OnBoundsCollision() {
             StopHookMovement();
-            pulledBackHook?.Raise();
+            if (pulledBackHook)
+                pulledBackHook.Raise();
         }
 
         private void HideHook() {
