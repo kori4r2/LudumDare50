@@ -16,6 +16,8 @@ namespace LudumDare50 {
         [SerializeField] private EventSO cameraChangeEvent;
         private EventListener camerachangeEventListener;
         private VariableObserver<bool> canMoveObserver;
+        [Header("Animation")]
+        [SerializeField] private CharacterAnimations characterAnimations;
         [Header("Hook")]
         [SerializeField] private Hook hook;
         public const string characterTag = "Character";
@@ -28,6 +30,7 @@ namespace LudumDare50 {
             SetInputProcessorCallbacks();
             canMoveObserver = new VariableObserver<bool>(canMove, OnCanMoveChanged);
             camerachangeEventListener = new EventListener(cameraChangeEvent, StayWithinCameraLimits);
+            characterAnimations.Setup();
         }
 
         private void SetInputProcessorCallbacks() {
@@ -116,6 +119,7 @@ namespace LudumDare50 {
         }
 
         private void Update() {
+            characterAnimations.Update(movable2D.IsMoving, hook.IsAiming);
             if (!isMoving)
                 return;
 
@@ -124,12 +128,14 @@ namespace LudumDare50 {
 
         private void OnEnable() {
             pointerInputProcessor.Enable();
+            characterAnimations.Enable();
             canMoveObserver.StartWatching();
             camerachangeEventListener.StartListeningEvent();
         }
 
         private void OnDisable() {
             pointerInputProcessor.Disable();
+            characterAnimations.Disable();
             canMoveObserver.StopWatching();
             camerachangeEventListener.StopListeningEvent();
         }

@@ -14,9 +14,11 @@ namespace LudumDare50 {
         [Header("Event References")]
         [SerializeField] private StarEvent hitStarEvent;
         [SerializeField] private EventSO pulledBackHook;
+        [SerializeField] private EventSO threwHook;
         private EventListener hookPullBackListener;
+        [Header("Animation")]
+        [SerializeField] private HookAnimations hookAnimation;
         [Header("Other References")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private BoolVariable canCharacterMove;
         [SerializeField] private StarRuntimeSet starsRuntimeSet;
         private Vector3 startingPosition;
@@ -26,6 +28,7 @@ namespace LudumDare50 {
         private void Awake() {
             aimCalculator = new AimCalculator(gameSettings);
             hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
+            hookAnimation.Setup();
             HideHook();
         }
 
@@ -42,13 +45,16 @@ namespace LudumDare50 {
 
         private void OnEnable() {
             hookPullBackListener?.StartListeningEvent();
+            hookAnimation.Enable();
         }
 
         private void OnDisable() {
             hookPullBackListener?.StopListeningEvent();
+            hookAnimation.Disable();
         }
 
         private void Update() {
+            hookAnimation.Update();
             if (!IsAiming)
                 return;
 
@@ -64,7 +70,7 @@ namespace LudumDare50 {
             transform.localPosition = startingPosition;
             aimCalculator.StartSwinging();
             UpdateRotation();
-            spriteRenderer.enabled = true;
+            hookAnimation.ShowHook();
             IsAiming = true;
         }
 
@@ -72,6 +78,9 @@ namespace LudumDare50 {
             StartHookMovement();
             IsAiming = false;
             ignoreTriggers = false;
+            hookAnimation.ShowLine(transform);
+            if (threwHook)
+                threwHook.Raise();
         }
 
         private void StartHookMovement() {
@@ -126,7 +135,7 @@ namespace LudumDare50 {
         private void HideHook() {
             transform.localPosition = startingPosition;
             StopHookMovement();
-            spriteRenderer.enabled = false;
+            hookAnimation.HideHook();
             IsAiming = false;
         }
 
