@@ -16,7 +16,7 @@ namespace LudumDare50 {
 
         private void Awake() {
             timer.Setup(gameSettings, isPlaying);
-            lastUsedOffset = 0f;
+            lastUsedOffset = MinMaterialOffset;
         }
 
         private void Update() {
@@ -29,7 +29,7 @@ namespace LudumDare50 {
         }
 
         private void UpdateBackgroundWithSmoothing(float smoothing) {
-            lastUsedOffset = Mathf.Lerp(lastUsedOffset, CurrentMaterialOffset, (1.0f - smoothing));
+            lastUsedOffset = Mathf.Lerp(lastUsedOffset, CurrentMaterialOffset, 1.0f - smoothing);
             backgroundShaderMaterial.SetFloat(shaderPropertyName, lastUsedOffset);
         }
 

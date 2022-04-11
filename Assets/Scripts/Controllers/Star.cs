@@ -11,6 +11,7 @@ namespace LudumDare50 {
         [SerializeField] private StarRuntimeSet runtimeSet;
         [SerializeField] private StarEvent despawnedStarEvent;
         [SerializeField] private Collider2D collisionTrigger;
+        [SerializeField] private StarAnimations starAnimations;
 
         private void Awake() {
             tag = starTag;
@@ -22,11 +23,16 @@ namespace LudumDare50 {
 
         private void OnEnable() {
             runtimeSet.AddElement(this);
+            starAnimations.TriggerFadeIn();
         }
 
         private void OnDisable() {
             runtimeSet.RemoveElement(this);
             StopAllCoroutines();
+        }
+
+        public void StartStruggleAnimation() {
+            starAnimations.TriggerStruggle();
         }
 
         public void FadeOut() {
@@ -35,6 +41,7 @@ namespace LudumDare50 {
 
             currentTime.Value += TimeGain;
             collisionTrigger.enabled = false;
+            starAnimations.TriggerFadeOut();
             StartCoroutine(DebugDespawnAfterTimeCoroutine());
         }
 

@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0b2b52a5938d4a5eb748e141e4a61da9: 0.85
+    - Vector1_0b2b52a5938d4a5eb748e141e4a61da9: 0.8
     - Vector1_dbdc142a89d0465fb240e33e53a9f532: 1
     m_Colors:
     - Color_9d571b2f995a4ee58629431adc1151ca: {r: 0.78699994, g: 0.6584486, b: 0.13929898, a: 0}

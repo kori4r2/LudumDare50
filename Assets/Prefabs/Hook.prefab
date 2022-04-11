@@ -210,10 +210,13 @@ MonoBehaviour:
   threwHook: {fileID: 11400000, guid: b6881b7cf0652bf4586520bf13d12f42, type: 2}
   hookAnimation:
     spriteRenderer: {fileID: 2879589867211307308}
+    indicatorSprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
+    hookSprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
     lineRenderer: {fileID: 8495264970902114106}
     hookAnchorPointOffset: {x: 0, y: -1, z: 0}
     hookAnimator: {fileID: 0}
     shakeHookBoolParameter: 
+    threwHookEvent: {fileID: 11400000, guid: b6881b7cf0652bf4586520bf13d12f42, type: 2}
     hitStarEvent: {fileID: 11400000, guid: c7a4dfb07ba50c5aba761c2f2a51c6e8, type: 2}
     pulledBackHookEvent: {fileID: 11400000, guid: 0ff8ecff64b1b53cf9833773c7cfcc9c, type: 2}
   canCharacterMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}

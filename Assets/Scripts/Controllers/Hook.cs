@@ -28,7 +28,7 @@ namespace LudumDare50 {
         private void Awake() {
             aimCalculator = new AimCalculator(gameSettings);
             hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
-            hookAnimation.Setup();
+            hookAnimation.Setup(threwHook, hitStarEvent, pulledBackHook);
             HideHook();
         }
 
@@ -70,7 +70,7 @@ namespace LudumDare50 {
             transform.localPosition = startingPosition;
             aimCalculator.StartSwinging();
             UpdateRotation();
-            hookAnimation.ShowHook();
+            hookAnimation.ShowHookIndicator();
             IsAiming = true;
         }
 

@@ -17,8 +17,11 @@ namespace LudumDare50 {
         }
 
         private void SaveReferenceToStar(Star star) {
-            if (!starToDespawn)
-                starToDespawn = star;
+            if (starToDespawn) {
+                return;
+            }
+            starToDespawn = star;
+            starToDespawn.StartStruggleAnimation();
         }
 
         private void FadeoutSavedStar() {
