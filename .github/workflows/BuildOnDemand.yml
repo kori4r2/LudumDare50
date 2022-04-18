@@ -22,7 +22,7 @@ jobs:
         # exit code is 1 for manual activation
         continue-on-error: true
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_ANDROID }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate Build
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_ANDROID }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           make android-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf
@@ -69,7 +69,7 @@ jobs:
         # exit code is 1 for manual activation
         continue-on-error: true
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_WEBGL }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
@@ -86,7 +86,7 @@ jobs:
 
       - name: Generate Build
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_WEBGL }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           make webgl-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf

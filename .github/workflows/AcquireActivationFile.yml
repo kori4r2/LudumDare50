@@ -5,11 +5,8 @@ on:
 
 jobs:
   activation-android:
-    name: Request manual activation file for android
+    name: Request manual activation file
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-android-0.15.0
-    env:
-      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
     steps:
       # Request manual activation file
       - name: Request manual activation file
@@ -19,23 +16,5 @@ jobs:
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: android-license.alf
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-
-  activation-webgl:
-    name: Request manual activation file for webgl
-    runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.15.0
-    env:
-      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
-    steps:
-      # Request manual activation file
-      - name: Request manual activation file
-        id: getManualLicenseFile
-        uses: game-ci/unity-request-activation-file@v2
-      # Upload artifact (Unity_v20XX.X.XXXX.alf)
-      - name: Expose as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: webgl-license.alf
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
