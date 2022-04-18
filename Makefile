@@ -41,7 +41,7 @@ windows-license : --check_license --check_variables --windows-license
 
 --webgl : --build_web --zip_web_build
 webgl : --check_variables --webgl
---webgl-license : --build_webgl-license --zip_webgl_build
+--webgl-license : --build_web-license --zip_web_build
 webgl-license : --check_license --check_variables --webgl-license
 
 --android : --build_android --zip_android_build

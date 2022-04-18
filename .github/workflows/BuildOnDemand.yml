@@ -7,7 +7,7 @@ jobs:
   build-and-upload-android:
     name: Generate And Upload Android Build Files
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-android-0.17.2
+    container: unityci/editor:ubuntu-2020.3.11f1-android-0.15.0
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
@@ -22,7 +22,7 @@ jobs:
         # exit code is 1 for manual activation
         continue-on-error: true
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_ANDROID }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate Build
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_ANDROID }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           make android-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf
@@ -54,7 +54,7 @@ jobs:
   build-and-upload-webgl:
     name: Generate And Upload WebGL Build Files
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.17.2
+    container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.15.0
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
@@ -69,7 +69,7 @@ jobs:
         # exit code is 1 for manual activation
         continue-on-error: true
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_WEBGL }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
@@ -86,7 +86,7 @@ jobs:
 
       - name: Generate Build
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_WEBGL }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           make webgl-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf
