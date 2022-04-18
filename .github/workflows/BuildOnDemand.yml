@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-upload-android:
-    name: Generate And Upload Linux Build Files
+    name: Generate And Upload Android Build Files
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2020.3.11f1-android-0.17.2
     env:
