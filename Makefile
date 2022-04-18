@@ -118,6 +118,6 @@ $(ANDROID_BUILD_DIR): $(BUILD_DIR)
 	@cd $(WEB_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Web.zip ./
 
 --zip_android_build: $(ANDROID_BUILD_DIR)
-	@echo -e "\tcreating android build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_android.zip ...\n"
-	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_android.zip
-	@cd $(ANDROID_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_android.zip ./
+	@echo -e "\tcreating android build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Android.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Android.zip
+	@cd $(ANDROID_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Android.zip ./
