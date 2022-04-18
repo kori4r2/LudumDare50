@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2020.3.11f1-android-0.17.2
     env:
-      DOTNET_ROOT: '/opt/unity/Editor/Data/NetCore/Sdk-2.2.107'
+      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
     steps:
       - name: Install dependencies
@@ -23,7 +23,7 @@ jobs:
         continue-on-error: true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        run: |          
+        run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
@@ -44,16 +44,16 @@ jobs:
           echo "ANDROID_BUILD_NAME=$ANDROID_BUILD_NAME" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
-      with:
-        name: ${{ env.ANDROID_BUILD_NAME }}
-        path: ./Build/${{ env.ANDROID_BUILD_NAME }}
+        with:
+          name: ${{ env.ANDROID_BUILD_NAME }}
+          path: ./Build/${{ env.ANDROID_BUILD_NAME }}
 
   build-and-upload-webgl:
     name: Generate And Upload WebGL Build Files
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.17.2
     env:
-      DOTNET_ROOT: '/opt/unity/Editor/Data/NetCore/Sdk-2.2.107'
+      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
     steps:
       - name: Install dependencies
@@ -67,7 +67,7 @@ jobs:
         continue-on-error: true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        run: |          
+        run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
@@ -88,6 +88,6 @@ jobs:
           echo "WEB_BUILD_NAME=$WEB_BUILD_NAME" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
-      with:
-        name: ${{ env.WEB_BUILD_NAME }}
-        path: ./Build/${{ env.WEB_BUILD_NAME }}
+        with:
+          name: ${{ env.WEB_BUILD_NAME }}
+          path: ./Build/${{ env.WEB_BUILD_NAME }}
