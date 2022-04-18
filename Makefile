@@ -6,6 +6,7 @@ endif
 PROJECT_NAME = $(shell grep productName $(PROJECT_SETTINGS) | sed 's/.*productName: //' | sed 's/ //g')
 VERSION = $(shell grep bundleVersion $(PROJECT_SETTINGS) | sed 's/.*bundleVersion: //')
 UNITY_EXECUTABLE =
+UNITY_LICENSE=
 BUILD_DIR = $(CURDIR)/Build
 LINUX_BUILD_DIR = $(BUILD_DIR)/Linux
 WINDOWS_BUILD_DIR = $(BUILD_DIR)/Windows
@@ -30,15 +31,26 @@ all : --check_variables --webgl --android
 
 --linux: --build_linux --zip_linux_build
 linux : --check_variables --linux
+--linux-license : --build_linux-license --zip_linux_build
+linux-license : --check_license --check_variables --linux-license
 
 --windows : --build_windows --zip_windows_build
 windows : --check_variables --windows
+--windows-license : --build_windows-license --zip_windows_build
+windows-license : --check_license --check_variables --windows-license
 
 --webgl : --build_web --zip_web_build
 webgl : --check_variables --webgl
+--webgl-license : --build_webgl-license --zip_webgl_build
+webgl-license : --check_license --check_variables --webgl-license
 
 --android : --build_android --zip_android_build
 android : --check_variables --android
+--android-license : --build_android-license --zip_android_build
+android-license : --check_license --check_variables --android-license
+
+--check_license:
+	$(call check_defined, UNITY_LICENSE, unity editor license for github actions workflows)
 
 --check_variables :
 	$(call check_defined, UNITY_EXECUTABLE, unity editor command or path to executable)
@@ -72,12 +84,32 @@ $(ANDROID_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\t Linux build finished!"
 	@echo -e "\t\\---------------------/\n\n"
 
+--build_linux-license: $(LINUX_BUILD_DIR)
+	@echo -e "\n\n\t/-------------------\\"
+	@echo -e "\t Linux build started"
+	@echo -e "\t\\-------------------/\n\n"
+	@rm -rf $(LINUX_BUILD_DIR)/*
+	@$(UNITY_EXECUTABLE) -manualLicenseFile $(UNITY_LICENSE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Linux64 -buildLinux64Player $(LINUX_BUILD_DIR)/$(PROJECT_NAME).x86_64
+	@echo -e "\n\n\t/---------------------\\"
+	@echo -e "\t Linux build finished!"
+	@echo -e "\t\\---------------------/\n\n"
+
 --build_windows: $(WINDOWS_BUILD_DIR)
 	@echo -e "\n\n\t/---------------------\\"
 	@echo -e "\t Windows build started"
 	@echo -e "\t\\---------------------/\n\n"
 	@rm -rf $(WINDOWS_BUILD_DIR)/*
 	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Win64 -buildWindows64Player $(WINDOWS_BUILD_DIR)/$(PROJECT_NAME).exe
+	@echo -e "\n\n\t/-----------------------\\"
+	@echo -e "\t Windows build finished!"
+	@echo -e "\t\\-----------------------/\n\n"
+
+--build_windows-license: $(WINDOWS_BUILD_DIR)
+	@echo -e "\n\n\t/---------------------\\"
+	@echo -e "\t Windows build started"
+	@echo -e "\t\\---------------------/\n\n"
+	@rm -rf $(WINDOWS_BUILD_DIR)/*
+	@$(UNITY_EXECUTABLE) -manualLicenseFile $(UNITY_LICENSE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Win64 -buildWindows64Player $(WINDOWS_BUILD_DIR)/$(PROJECT_NAME).exe
 	@echo -e "\n\n\t/-----------------------\\"
 	@echo -e "\t Windows build finished!"
 	@echo -e "\t\\-----------------------/\n\n"
@@ -92,12 +124,32 @@ $(ANDROID_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\t WebGL build finished!"
 	@echo -e "\t\\---------------------/\n\n"
 
+--build_web-license: $(WEB_BUILD_DIR)
+	@echo -e "\n\n\t/-------------------\\"
+	@echo -e "\t WebGL build started"
+	@echo -e "\t\\-------------------/\n\n"
+	@rm -rf $(WEB_BUILD_DIR)/*
+	@$(UNITY_EXECUTABLE) -manualLicenseFile $(UNITY_LICENSE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget WebGL -executeMethod LudumDare50.EditorScripts.CustomBuilders.BuildWebGL $(WEB_BUILD_DIR)/
+	@echo -e "\n\n\t/---------------------\\"
+	@echo -e "\t WebGL build finished!"
+	@echo -e "\t\\---------------------/\n\n"
+
 --build_android: $(ANDROID_BUILD_DIR)
 	@echo -e "\n\n\t/-------------------\\"
 	@echo -e "\t Android build started"
 	@echo -e "\t\\-------------------/\n\n"
 	@rm -rf $(ANDROID_BUILD_DIR)/*
 	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Android -executeMethod LudumDare50.EditorScripts.CustomBuilders.BuildAndroid $(ANDROID_BUILD_DIR)/$(PROJECT_NAME).apk
+	@echo -e "\n\n\t/---------------------\\"
+	@echo -e "\t Android build finished!"
+	@echo -e "\t\\---------------------/\n\n"
+
+--build_android-license: $(ANDROID_BUILD_DIR)
+	@echo -e "\n\n\t/-------------------\\"
+	@echo -e "\t Android build started"
+	@echo -e "\t\\-------------------/\n\n"
+	@rm -rf $(ANDROID_BUILD_DIR)/*
+	@$(UNITY_EXECUTABLE) -manualLicenseFile $(UNITY_LICENSE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Android -executeMethod LudumDare50.EditorScripts.CustomBuilders.BuildAndroid $(ANDROID_BUILD_DIR)/$(PROJECT_NAME).apk
 	@echo -e "\n\n\t/---------------------\\"
 	@echo -e "\t Android build finished!"
 	@echo -e "\t\\---------------------/\n\n"

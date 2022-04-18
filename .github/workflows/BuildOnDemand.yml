@@ -23,11 +23,9 @@ jobs:
         continue-on-error: true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
-          unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -username "$UNITY_EMAIL" -password "$UNITY_PASSWORD" -quit | echo "Activation finished"
+          unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -40,8 +38,11 @@ jobs:
           key: Library-2020.3.11-android
 
       - name: Generate Build
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
-          make android UNITY_EXECUTABLE=unity-editor
+          echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
+          make android-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf
           export ANDROID_BUILD_NAME=$(ls Build/*Android.zip | sed -e 's/Build\///')
           echo "ANDROID_BUILD_NAME=$ANDROID_BUILD_NAME" >> $GITHUB_ENV
 
@@ -69,11 +70,9 @@ jobs:
         continue-on-error: true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
-          unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -username "$UNITY_EMAIL" -password "$UNITY_PASSWORD" -quit | echo "Activation finished"
+          unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -86,8 +85,11 @@ jobs:
           key: Library-2020.3.11-webgl
 
       - name: Generate Build
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
-          make webgl UNITY_EXECUTABLE=unity-editor
+          echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
+          make webgl-license UNITY_EXECUTABLE=unity-editor UNITY_LICENSE=UnityLicenseFile.ulf
           export WEB_BUILD_NAME=$(ls Build/*Web.zip | sed -e 's/Build\///')
           echo "WEB_BUILD_NAME=$WEB_BUILD_NAME" >> $GITHUB_ENV
 
