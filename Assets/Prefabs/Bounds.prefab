@@ -71,3 +71,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundsCamera: {fileID: 0}
   boundsCollider: {fileID: 7799290031389315697}
+  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}

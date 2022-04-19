@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,24 @@ namespace LudumDare50 {
         public const string boundsTag = "Bounds";
         [SerializeField] private Camera boundsCamera;
         [SerializeField] private EdgeCollider2D boundsCollider;
+        [SerializeField] private EventSO cameraChangeEvent;
+        private EventListener cameraChangeEventListener;
+
+        private void Awake() {
+            cameraChangeEventListener = new EventListener(cameraChangeEvent, OnCameraChange);
+        }
+
+        private void OnCameraChange() {
+            UpdateBounds();
+        }
+
+        private void OnEnable() {
+            cameraChangeEventListener?.StartListeningEvent();
+        }
+
+        private void OnDisable() {
+            cameraChangeEventListener?.StopListeningEvent();
+        }
 
         private void Start() {
             UpdateBounds();
@@ -46,7 +65,7 @@ namespace LudumDare50 {
         private static List<Vector2> GetNewColliderPoints(Vector2 worldSpaceLimits) {
             List<Vector2> newPoints = new List<Vector2>(DefaultColliderPoints);
             for (int index = 0; index < DefaultColliderPoints.Length; index++) {
-                newPoints[index] *= (worldSpaceLimits / 2f);
+                newPoints[index] *= worldSpaceLimits / 2f;
             }
             return newPoints;
         }

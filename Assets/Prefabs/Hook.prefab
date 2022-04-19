@@ -216,9 +216,7 @@ MonoBehaviour:
     hookAnchorPointOffset: {x: 0, y: -1, z: 0}
     hookAnimator: {fileID: 0}
     shakeHookBoolParameter: 
-    threwHookEvent: {fileID: 11400000, guid: b6881b7cf0652bf4586520bf13d12f42, type: 2}
-    hitStarEvent: {fileID: 11400000, guid: c7a4dfb07ba50c5aba761c2f2a51c6e8, type: 2}
-    pulledBackHookEvent: {fileID: 11400000, guid: 0ff8ecff64b1b53cf9833773c7cfcc9c, type: 2}
+  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
   canCharacterMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
   starsRuntimeSet: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
 --- !u!50 &3028985540662351456
