@@ -40,7 +40,7 @@ jobs:
       - name: Generate Build
         run: |
           make android UNITY_EXECUTABLE=unity-editor
-          export ANDROID_BUILD_NAME=$(ls Build/*Android.zip | sed -e 's/Build\///')
+          export ANDROID_BUILD_NAME=$(ls Build/Android/*.apk | sed -e 's/Build\///')
           echo "ANDROID_BUILD_NAME=$ANDROID_BUILD_NAME" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
@@ -84,8 +84,7 @@ jobs:
       - name: Generate Build
         run: |
           make webgl UNITY_EXECUTABLE=unity-editor
-          export WEB_BUILD_NAME=$(ls Build/*Web.zip | sed -e 's/Build\///')
-          echo "WEB_BUILD_NAME=$WEB_BUILD_NAME" >> $GITHUB_ENV
+          echo "WEB_BUILD_NAME=Web/" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:
