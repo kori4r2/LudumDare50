@@ -40,6 +40,8 @@ namespace LudumDare50 {
         }
 
         private void OnPressPointer(InputAction.CallbackContext context) {
+            Vector2 currentPositionActionValue = pointerPositionAction.action.ReadValue<Vector2>();
+            UpdatePointerPosition(currentPositionActionValue);
             onPress?.Invoke();
         }
 
@@ -49,6 +51,10 @@ namespace LudumDare50 {
 
         private void OnMovePointer(InputAction.CallbackContext context) {
             Vector2 actionValue = context.ReadValue<Vector2>();
+            UpdatePointerPosition(actionValue);
+        }
+
+        private void UpdatePointerPosition(Vector2 actionValue) {
             Vector2 screenSize = new Vector2(Screen.width, Screen.height);
             Vector2 screenPosition = ClampVector2(actionValue, Vector2.zero, screenSize);
             pointerPosition = MainCamera.ScreenToWorldPoint(screenPosition);
