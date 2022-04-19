@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b4e80570be5b01e8393f5853313843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edgeRadius: 0.3
+  padding: 3
   boundsCamera: {fileID: 0}
   boundsCollider: {fileID: 7799290031389315697}
   cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}

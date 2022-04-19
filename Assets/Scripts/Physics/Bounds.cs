@@ -17,7 +17,8 @@ namespace LudumDare50 {
             }
         }
         #endregion
-        private const float edgeRadius = 5f;
+        [SerializeField, Range(0.1f, 2f)] private float edgeRadius = 0.25f;
+        [SerializeField, Range(0.1f, 10f)] private float padding = 2f;
         public const string boundsTag = "Bounds";
         [SerializeField] private Camera boundsCamera;
         [SerializeField] private EdgeCollider2D boundsCollider;
@@ -52,6 +53,7 @@ namespace LudumDare50 {
         private Vector2 GetWorldSpaceLimits() {
             Vector2 worldSpaceLimits = CameraUtils.GetWorldSpaceCameraSize(boundsCamera);
             worldSpaceLimits += new Vector2(2 * edgeRadius, 2 * edgeRadius);
+            worldSpaceLimits += new Vector2(2 * padding, 2 * padding);
             return worldSpaceLimits;
         }
 
