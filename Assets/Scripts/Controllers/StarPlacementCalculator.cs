@@ -38,7 +38,7 @@ namespace LudumDare50 {
             float availableArea = spawnArea.width * spawnArea.height;
             float starRadius = spaceBetweenStars / 2f;
             float spacePerStar = Mathf.Pow(starRadius, 2f);
-            MaxNStars = Mathf.Min(Mathf.FloorToInt(availableArea / spacePerStar), starPoolSize);
+            MaxNStars = Mathf.Clamp(Mathf.FloorToInt(availableArea / spacePerStar), 2, starPoolSize);
         }
 
         private void SetupCameraChangeCallbacks(int starPoolSize) {

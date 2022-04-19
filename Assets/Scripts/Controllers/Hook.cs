@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace LudumDare50 {
         [Header("Animation")]
         [SerializeField] private HookAnimations hookAnimation;
         [Header("Other References")]
+        [SerializeField] private BoolVariable isPlaying;
+        private VariableObserver<bool> isPlayingObserver;
         [SerializeField] private BoolVariable canCharacterMove;
         [SerializeField] private StarRuntimeSet starsRuntimeSet;
         private Vector3 startingPosition;
@@ -28,6 +31,7 @@ namespace LudumDare50 {
         private void Awake() {
             aimCalculator = new AimCalculator(gameSettings);
             hookPullBackListener = new EventListener(pulledBackHook, ReturnHook);
+            isPlayingObserver = new VariableObserver<bool>(isPlaying, GameStateChanged);
             hookAnimation.Setup(threwHook, hitStarEvent, pulledBackHook);
             HideHook();
         }
@@ -38,6 +42,16 @@ namespace LudumDare50 {
             hookMovable.SetVelocity(-aimCalculator.ThrowDirection * ReturnSpeed);
         }
 
+        private void GameStateChanged(bool newIsPlaying) {
+            if (newIsPlaying)
+                return;
+
+            // TODO delete
+            StopAllCoroutines();
+            StopHookMovement();
+            ReturnHook();
+        }
+
         private void StopHookMovement() {
             hookMovable.AllowKinematicMovement();
             hookMovable.SetVelocity(Vector2.zero);
@@ -45,11 +59,13 @@ namespace LudumDare50 {
 
         private void OnEnable() {
             hookPullBackListener?.StartListeningEvent();
+            isPlayingObserver?.StartWatching();
             hookAnimation.Enable();
         }
 
         private void OnDisable() {
             hookPullBackListener?.StopListeningEvent();
+            isPlayingObserver?.StopWatching();
             hookAnimation.Disable();
         }
 
