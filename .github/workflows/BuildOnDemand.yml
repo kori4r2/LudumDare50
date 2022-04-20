@@ -13,7 +13,7 @@ jobs:
     if: |
       (github.event.inputs.targets == '' ||
       github.event.inputs.targets == 'all' ||
-      contains(github.event.inputs.targets, 'android')
+      contains(github.event.inputs.targets, 'android'))
     name: Generate And Upload Android Build Files
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2020.3.11f1-android-0.15.0
@@ -61,7 +61,7 @@ jobs:
     if: |
       (github.event.inputs.targets == '' ||
       github.event.inputs.targets == 'all' ||
-      contains(github.event.inputs.targets, 'web')
+      contains(github.event.inputs.targets, 'web'))
     name: Generate And Upload WebGL Build Files
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.15.0
