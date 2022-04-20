@@ -49,13 +49,15 @@ jobs:
       - name: Generate Build
         run: |
           make android UNITY_EXECUTABLE=unity-editor
-          export ANDROID_BUILD_NAME=$(ls Build/Android/*.apk | sed -e 's/Build\///')
-          echo "ANDROID_BUILD_NAME=$ANDROID_BUILD_NAME" >> $GITHUB_ENV
+          export ANDROID_BUILD_PATH=$(ls Build/Android/*.apk | sed -e 's/Build\///')
+          echo "ANDROID_BUILD_PATH=$ANDROID_BUILD_PATH" >> $GITHUB_ENV
+          export ANDROID_BUILD_FILENAME=$(ls Build/Android/*.apk | sed -e 's/Build\/Android\///')
+          echo "ANDROID_BUILD_FILENAME=$ANDROID_BUILD_FILENAME" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.ANDROID_BUILD_NAME }}
-          path: ./Build/${{ env.ANDROID_BUILD_NAME }}
+          name: ${{ env.ANDROID_BUILD_FILENAME }}
+          path: ./Build/${{ env.ANDROID_BUILD_PATH }}
 
   build-and-upload-webgl:
     if: |
@@ -97,7 +99,7 @@ jobs:
       - name: Generate Build
         run: |
           make webgl UNITY_EXECUTABLE=unity-editor
-          echo "WEB_BUILD_NAME=Web/" >> $GITHUB_ENV
+          echo "WEB_BUILD_NAME=Web" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:
