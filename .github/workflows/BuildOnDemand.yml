@@ -144,7 +144,10 @@ jobs:
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         env:
           CHERE_INVOKING: 1
-        run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf
+        run: |
+          echo $PWD
+          echo "$UNITY_LICENSE" > UnityLicenseFile.ulf
+          ls
 
       - name: Activate unity
         # exit code is 1 for manual activation
