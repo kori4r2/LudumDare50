@@ -117,6 +117,16 @@ jobs:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.0.1
+
+      - name: Cache Library
+        id: cache-library
+        uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-2020.3.11-windows
+
       - name: Install Unity
         id: install_unity
         uses: kuler90/setup-unity@v1
@@ -141,22 +151,6 @@ jobs:
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
-
-      - name: Fix weird checkout bug
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-        run: |
-          git config --global init.defaultBranch main
-          git config --global --add safe.directory /cygdrive/d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}
-
-      - name: Checkout repository
-        uses: actions/checkout@v3.0.1
-
-      - name: Cache Library
-        id: cache-library
-        uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-2020.3.11-windows
 
       - name: Generate Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
