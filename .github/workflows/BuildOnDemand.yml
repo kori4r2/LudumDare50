@@ -112,15 +112,18 @@ jobs:
       github.event.inputs.targets == 'all' ||
       contains(github.event.inputs.targets, 'windows'))
     name: Generate And Upload Windows Build Files
-    runs-on: ubuntu-latest
-    container:
-      image: unityci/editor:windows-2020.3.11f1-windows-il2cpp-0.17.0
-      options: --platform windows
+    runs-on: windows-latest
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
-      UNITY_EXECUTABLE: "C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Unity.exe"
 
     steps:
+      - name: Install Unity
+        id: install_unity
+        uses: kuler90/setup-unity@v1
+        with:
+          version: 2020.3.11f1
+          untiy-modules: windows-il2cpp
+
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v3
         with:
@@ -133,6 +136,7 @@ jobs:
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
@@ -149,6 +153,8 @@ jobs:
 
       - name: Generate Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+        env:
+          UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
           make windows UNITY_EXECUTABLE="$UNITY_EXECUTABLE"
           echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
