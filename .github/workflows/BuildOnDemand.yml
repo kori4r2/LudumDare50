@@ -140,6 +140,12 @@ jobs:
           platform: x64
           packages: make zip sed grep
 
+      - name: Create license file
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+        env:
+          CHERE_INVOKING: 1
+        run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf
+
       - name: Activate unity
         # exit code is 1 for manual activation
         continue-on-error: true
@@ -148,7 +154,6 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
-          echo %UNITY_LICENSE% > UnityLicenseFile.ulf
           dir
           echo "%UNITY_EXECUTABLE%"
           "%UNITY_EXECUTABLE%" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
