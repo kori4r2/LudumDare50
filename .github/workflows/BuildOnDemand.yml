@@ -143,6 +143,7 @@ jobs:
       - name: Activate unity
         # exit code is 1 for manual activation
         continue-on-error: true
+        shell: cmd
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
@@ -160,6 +161,7 @@ jobs:
         run: |
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           echo "$UNITY_EXECUTABLE"
+          echo "$PWD"
           ls
           make windows UNITY_EXECUTABLE="\"$UNITY_EXECUTABLE\""
           echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
