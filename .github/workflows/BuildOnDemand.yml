@@ -143,7 +143,7 @@ jobs:
           "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.1
 
       - name: Cache Library
         id: cache-library
