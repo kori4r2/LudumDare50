@@ -148,6 +148,8 @@ jobs:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
           echo %UNITY_LICENSE% > UnityLicenseFile.ulf
+          dir
+          echo "%UNITY_EXECUTABLE%"
           "%UNITY_EXECUTABLE%" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
 
       - name: Generate Build
