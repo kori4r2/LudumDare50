@@ -127,12 +127,12 @@ jobs:
           path: Library
           key: Library-2020.3.11-windows
 
-      - name: Install Unity
-        id: install_unity
-        uses: kuler90/setup-unity@v1
-        with:
-          unity-version: 2020.3.11f1
-          unity-modules: windows-il2cpp
+      # - name: Install Unity
+      #   id: install_unity
+      #   uses: kuler90/setup-unity@v1
+      #   with:
+      #     unity-version: 2020.3.11f1
+      #     unity-modules: windows-il2cpp
 
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v3
@@ -140,19 +140,11 @@ jobs:
           platform: x64
           packages: make zip sed grep
 
-      - name: Get Working Directory
-        id: get_current_dir
-        shell: cmd
-        run: |
-          set CURDIR=%cd%
-          echo %cd%
-          echo "::set-output name=path::%CURDIR%"
-
       - name: Create license file
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         run: |
-          echo ${{ steps.get_current_dir.outputs.path }}
-          cd "${{ steps.get_current_dir.outputs.path }}"
+          echo "path = $GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
           echo $PWD
           echo "$UNITY_LICENSE" > UnityLicenseFile.ulf
           ls
