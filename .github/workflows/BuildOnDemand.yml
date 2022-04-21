@@ -143,15 +143,12 @@ jobs:
       - name: Activate unity
         # exit code is 1 for manual activation
         continue-on-error: true
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
-          CHERE_INVOKING: 1
         run: |
-          echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
-          export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
-          "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
+          echo $UNITY_LICENSE > UnityLicenseFile.ulf
+          "$UNITY_EXECUTABLE" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
 
       - name: Generate Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
