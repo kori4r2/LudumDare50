@@ -138,7 +138,7 @@ jobs:
         uses: egor-tensin/setup-cygwin@v3
         with:
           platform: x64
-          packages: make zip sed grep git
+          packages: make zip sed grep
 
       - name: Activate unity
         # exit code is 1 for manual activation
