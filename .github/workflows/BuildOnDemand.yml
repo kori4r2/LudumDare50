@@ -106,11 +106,11 @@ jobs:
           name: ${{ env.WEB_BUILD_NAME }}
           path: ./Build/${{ env.WEB_BUILD_NAME }}
 
-  build-and-upload-windows:
+  build-and-upload-windows-il2cpp:
     if: |
-      (github.event.inputs.targets == '' ||
-      github.event.inputs.targets == 'all' ||
-      contains(github.event.inputs.targets, 'windows'))
+      (github.event.inputs.targets != '' &&
+      github.event.inputs.targets != 'all' &&
+      contains(github.event.inputs.targets, 'windows-il2cpp'))
     name: Generate And Upload Windows Build Files
     runs-on: windows-latest
     env:
@@ -141,6 +141,12 @@ jobs:
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
+
+      - name: Fix weird checkout bug
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+        run: |
+          git config --global init.defaultBranch main
+          git config --global --add safe.directory /cygdrive/d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}
 
       - name: Checkout repository
         uses: actions/checkout@v3.0.1
