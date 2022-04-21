@@ -132,7 +132,7 @@ jobs:
         uses: kuler90/setup-unity@v1
         with:
           unity-version: 2020.3.11f1
-          untiy-modules: windows-il2cpp
+          unity-modules: windows-il2cpp
 
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v3
