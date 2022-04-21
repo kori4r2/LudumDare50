@@ -151,8 +151,8 @@ jobs:
       - name: Create license file
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         run: |
-          echo ${{ setps.get_current_dir.outputs.path }}
-          cd "${{ setps.get_current_dir.outputs.path }}"
+          echo ${{ steps.get_current_dir.outputs.path }}
+          cd "${{ steps.get_current_dir.outputs.path }}"
           echo $PWD
           echo "$UNITY_LICENSE" > UnityLicenseFile.ulf
           ls
