@@ -121,7 +121,7 @@ jobs:
         id: install_unity
         uses: kuler90/setup-unity@v1
         with:
-          version: 2020.3.11f1
+          unity-version: 2020.3.11f1
           untiy-modules: windows-il2cpp
 
       - name: Set up Cygwin
