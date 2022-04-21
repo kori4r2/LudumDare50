@@ -105,3 +105,53 @@ jobs:
         with:
           name: ${{ env.WEB_BUILD_NAME }}
           path: ./Build/${{ env.WEB_BUILD_NAME }}
+
+  build-and-upload-windows:
+    if: |
+      (github.event.inputs.targets == '' ||
+      github.event.inputs.targets == 'all' ||
+      contains(github.event.inputs.targets, 'windows'))
+    name: Generate And Upload Windows Build Files
+    runs-on: windows-latest
+    container: unityci/editor:windows-2020.3.11f1-windows-il2cpp-0.17.0
+    env:
+      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
+      UNITY_EXECUTABLE: "C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Unity.exe"
+
+    steps:
+      - name: Set up Cygwin
+        uses: egor-tensin/setup-cygwin@v3
+        with:
+          platform: x64
+          packages: make zip sed grep git
+
+      - name: Activate unity
+        # exit code is 1 for manual activation
+        continue-on-error: true
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
+          "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Cache Library
+        id: cache-library
+        uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-2020.3.11-windows
+
+      - name: Generate Build
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+        run: |
+          make windows UNITY_EXECUTABLE="$UNITY_EXECUTABLE"
+          echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.WINDOWS_BUILD_NAME }}
+          path: ./Build/${{ env.WINDOWS_BUILD_NAME }}
