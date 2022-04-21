@@ -147,8 +147,8 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
-          echo $UNITY_LICENSE > UnityLicenseFile.ulf
-          "$UNITY_EXECUTABLE" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
+          echo %UNITY_LICENSE% > UnityLicenseFile.ulf
+          "%UNITY_EXECUTABLE%" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
 
       - name: Generate Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
