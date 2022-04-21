@@ -113,7 +113,9 @@ jobs:
       contains(github.event.inputs.targets, 'windows'))
     name: Generate And Upload Windows Build Files
     runs-on: ubuntu-latest
-    container: unityci/editor:windows-2020.3.11f1-windows-il2cpp-0.17.0
+    container:
+      image: unityci/editor:windows-2020.3.11f1-windows-il2cpp-0.17.0
+      options: --platform windows
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
       UNITY_EXECUTABLE: "C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Unity.exe"
