@@ -147,6 +147,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
+          CHERE_INVOKING: 1
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
@@ -156,6 +157,7 @@ jobs:
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         env:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
+          CHERE_INVOKING: 1
         run: |
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           echo "$UNITY_EXECUTABLE"
