@@ -139,10 +139,11 @@ jobs:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
           echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
+          export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           "$UNITY_EXECUTABLE" -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Library
         id: cache-library
@@ -156,6 +157,7 @@ jobs:
         env:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
+          export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
           make windows UNITY_EXECUTABLE="$UNITY_EXECUTABLE"
           echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
 
