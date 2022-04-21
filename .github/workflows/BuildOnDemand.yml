@@ -159,6 +159,8 @@ jobs:
           CHERE_INVOKING: 1
         run: |
           export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
+          echo "$UNITY_EXECUTABLE"
+          ls
           make windows UNITY_EXECUTABLE="\"$UNITY_EXECUTABLE\""
           echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
 
