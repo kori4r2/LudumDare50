@@ -5,7 +5,7 @@ on:
 
 jobs:
   activation-linux:
-    name: Request manual activation file
+    name: Request manual activation file (Linux)
     runs-on: ubuntu-latest
     steps:
       # Request manual activation file
