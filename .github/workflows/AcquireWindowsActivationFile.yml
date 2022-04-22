@@ -4,9 +4,9 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  activation-linux:
+  activation-windows:
     name: Request manual activation file
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       # Request manual activation file
       - name: Request manual activation file
