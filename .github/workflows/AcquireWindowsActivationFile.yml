@@ -19,6 +19,8 @@ jobs:
           unity-modules: windows-il2cpp
 
       - name: Request .alf file
+        # exit code is 1 for manual activation
+        continue-on-error: true
         shell: cmd
         env:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
