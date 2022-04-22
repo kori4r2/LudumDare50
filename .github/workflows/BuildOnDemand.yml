@@ -106,76 +106,69 @@ jobs:
           name: ${{ env.WEB_BUILD_NAME }}
           path: ./Build/${{ env.WEB_BUILD_NAME }}
 
-  build-and-upload-windows-il2cpp:
-    if: |
-      (github.event.inputs.targets != '' &&
-      github.event.inputs.targets != 'all' &&
-      contains(github.event.inputs.targets, 'windows-il2cpp'))
-    name: Generate And Upload Windows Build Files
-    runs-on: windows-latest
-    env:
-      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
+  # Doesn't work, would work with containers
+  # build-and-upload-windows-il2cpp:
+  #   if: |
+  #     (github.event.inputs.targets != '' &&
+  #     github.event.inputs.targets != 'all' &&
+  #     contains(github.event.inputs.targets, 'windows-il2cpp'))
+  #   name: Generate And Upload Windows Build Files
+  #   runs-on: windows-latest
+  #   env:
+  #     DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3.0.1
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3.0.1
 
-      - name: Cache Library
-        id: cache-library
-        uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-2020.3.11-windows
+  #     - name: Cache Library
+  #       id: cache-library
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: Library
+  #         key: Library-2020.3.11-windows
 
-      - name: Install Unity
-        id: install_unity
-        uses: kuler90/setup-unity@v1
-        with:
-          unity-version: 2020.3.11f1
-          unity-modules: windows-il2cpp
+  #     - name: Install Unity
+  #       id: install_unity
+  #       uses: kuler90/setup-unity@v1
+  #       with:
+  #         unity-version: 2020.3.11f1
+  #         unity-modules: windows-il2cpp
 
-      - name: Set up Cygwin
-        uses: egor-tensin/setup-cygwin@v3
-        with:
-          platform: x64
-          packages: make zip sed grep
+  #     - name: Set up Cygwin
+  #       uses: egor-tensin/setup-cygwin@v3
+  #       with:
+  #         platform: x64
+  #         packages: make zip sed grep
 
-      - name: Create license file
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-        env:
-          UNITY_LICENSE_WINDOWS: ${{ secrets.UNITY_LICENSE_WINDOWS }}
-        run: |
-          echo "path = $GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
-          echo $PWD
-          echo "$UNITY_LICENSE_WINDOWS" > UnityLicenseFile.ulf
-          ls
+  #     - name: Create license file
+  #       shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+  #       env:
+  #         UNITY_LICENSE_WINDOWS: ${{ secrets.UNITY_LICENSE_WINDOWS }}
+  #       run: |
+  #         cd "$GITHUB_WORKSPACE"
+  #         echo "$UNITY_LICENSE_WINDOWS" > UnityLicenseFile.ulf
 
-      - name: Activate unity
-        # exit code is 1 for manual activation
-        continue-on-error: true
-        shell: cmd
-        env:
-          UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
-        run: |
-          dir
-          echo "%UNITY_EXECUTABLE%"
-          "%UNITY_EXECUTABLE%" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
+  #     - name: Activate unity
+  #       # exit code is 1 for manual activation
+  #       continue-on-error: true
+  #       shell: cmd
+  #       env:
+  #         UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
+  #       run: |
+  #         "%UNITY_EXECUTABLE%" -batchmode -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit
 
-      - name: Generate Build
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-        env:
-          UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
-          CHERE_INVOKING: 1
-        run: |
-          export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
-          echo "$UNITY_EXECUTABLE"
-          echo "$PWD"
-          ls
-          make windows UNITY_EXECUTABLE="\"$UNITY_EXECUTABLE\""
-          echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
+  #     - name: Generate Build
+  #       shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+  #       env:
+  #         UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
+  #         CHERE_INVOKING: 1
+  #       run: |
+  #         export UNITY_EXECUTABLE=$(echo "$UNITY_EXECUTABLE" | sed -e 's/\\/\//g')
+  #         make windows UNITY_EXECUTABLE="\"$UNITY_EXECUTABLE\""
+  #         echo "WINDOWS_BUILD_NAME=Windows" >> $GITHUB_ENV
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.WINDOWS_BUILD_NAME }}
-          path: ./Build/${{ env.WINDOWS_BUILD_NAME }}
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: ${{ env.WINDOWS_BUILD_NAME }}
+  #         path: ./Build/${{ env.WINDOWS_BUILD_NAME }}
