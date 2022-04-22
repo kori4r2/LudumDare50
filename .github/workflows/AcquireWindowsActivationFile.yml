@@ -43,4 +43,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.getFilePath.outputs.filePath }}
-          path: ./Build/${{ steps.getFilePath.outputs.filePath }}
+          path: ${{ steps.getFilePath.outputs.filePath }}
