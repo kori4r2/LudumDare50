@@ -143,7 +143,7 @@ jobs:
       - name: Create license file
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_WINDOWS }}
+          UNITY_LICENSE_WINDOWS: ${{ secrets.UNITY_LICENSE_WINDOWS }}
         run: |
           echo "path = $GITHUB_WORKSPACE"
           cd "$GITHUB_WORKSPACE"
