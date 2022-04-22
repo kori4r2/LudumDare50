@@ -1,11 +1,11 @@
-name: Acquire activation file
+name: Acquire activation file (Linux)
 
 on:
   workflow_dispatch: {}
 
 jobs:
   activation-linux:
-    name: Request manual activation file (Linux)
+    name: Request manual activation file
     runs-on: ubuntu-latest
     steps:
       # Request manual activation file
