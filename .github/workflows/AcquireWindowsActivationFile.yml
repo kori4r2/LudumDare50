@@ -25,7 +25,8 @@ jobs:
         env:
           UNITY_EXECUTABLE: ${{ steps.install_unity.outputs.unity-path }}
         run: |
-          "%UNITY_EXECUTABLE%" -batchmode -createManualActivationFile -logfile
+          "%UNITY_EXECUTABLE%" -batchmode -createManualActivationFile -logfile | echo File request finished
+          dir
 
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v3
