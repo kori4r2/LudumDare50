@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace LudumDare50 {
-    public interface IStarSpreader {
+    public interface IObjectSpreader {
         void Setup(Rect area);
         Vector3 GetNewPosition();
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace LudumDare50 {
-    public class SpreadFromRandomCircle : IStarSpreader {
+    public class SpreadFromRandomCircle : IObjectSpreader {
         private Rect rectangularArea;
         public Vector3 GetNewPosition() {
             Vector2 newPoint = MapCircleToSquare(Random.insideUnitCircle);

@@ -13,7 +13,7 @@ namespace LudumDare50 {
         private VariableObserver<bool> isPlayingObserver;
         [SerializeField] private RuntimeSet<Star> starsSpawned;
         private int StarCount => starsSpawned.Count;
-        private bool CanSpawnStar => StarCount < placementCalculator.MaxNStars;
+        private bool CanSpawnStar => StarCount < placementCalculator.MaxNObjects;
         [SerializeField] private EventSO cameraChangeEvent;
         private EventListener cameraChangeEventListener;
 
@@ -48,7 +48,7 @@ namespace LudumDare50 {
             if (!CanSpawnStar)
                 return;
 
-            Vector3 newPosition = placementCalculator.GetNextStarPosition();
+            Vector3 newPosition = placementCalculator.GetNextObjectPosition();
             starPool.InstantiateObject(newPosition, Quaternion.identity);
         }
 
@@ -85,12 +85,12 @@ namespace LudumDare50 {
         }
 
         private void RemoveStarsAboveMaxNumber() {
-            if (StarCount <= placementCalculator.MaxNStars)
+            if (StarCount <= placementCalculator.MaxNObjects)
                 return;
 
             foreach (Star star in starsSpawned.ToArray()) {
                 starPool.ReturnObjectToPool(star);
-                if (StarCount <= placementCalculator.MaxNStars)
+                if (StarCount <= placementCalculator.MaxNObjects)
                     return;
             }
         }
