@@ -387,8 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae92d283f827eae6a93c0baa1d0d088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starPrefab: {fileID: 6356066375769239500, guid: d6b4455ed30922b35aa633ece0723d8d, type: 3}
   poolSize: 30
+  starPrefab: {fileID: 6356066375769239500, guid: d6b4455ed30922b35aa633ece0723d8d, type: 3}
   despawnedStarEvent: {fileID: 11400000, guid: 31b4f1411c962d580a1a8c80b1162bfa, type: 2}
 --- !u!114 &879461807
 MonoBehaviour:

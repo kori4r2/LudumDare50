@@ -49,12 +49,12 @@ namespace LudumDare50 {
                 return;
 
             Vector3 newPosition = placementCalculator.GetNextStarPosition();
-            starPool.InstantiateStar(newPosition, Quaternion.identity);
+            starPool.InstantiateObject(newPosition, Quaternion.identity);
         }
 
         private void ReturnAllStarsToPool() {
             foreach (Star star in starsSpawned.ToArray()) {
-                starPool.ReturnStarToPool(star);
+                starPool.ReturnObjectToPool(star);
             }
         }
 
@@ -80,7 +80,7 @@ namespace LudumDare50 {
                 if (CameraUtils.IsInsideLimits(star.transform.position, spawnArea.min, spawnArea.max))
                     continue;
 
-                starPool.ReturnStarToPool(star);
+                starPool.ReturnObjectToPool(star);
             }
         }
 
@@ -89,7 +89,7 @@ namespace LudumDare50 {
                 return;
 
             foreach (Star star in starsSpawned.ToArray()) {
-                starPool.ReturnStarToPool(star);
+                starPool.ReturnObjectToPool(star);
                 if (StarCount <= placementCalculator.MaxNStars)
                     return;
             }

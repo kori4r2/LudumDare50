@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 namespace LudumDare50 {
-    public class Star : MonoBehaviour {
+    public class Star : MonoBehaviour, IPoolableObject {
         public const string starTag = "Star";
         [SerializeField] private ActiveGameSettingsReference gameSettings;
         private float TimeGain => gameSettings.StarTimeGain;
@@ -17,7 +17,7 @@ namespace LudumDare50 {
             tag = starTag;
         }
 
-        public void Init() {
+        public void InitObject() {
             collisionTrigger.enabled = true;
         }
 
