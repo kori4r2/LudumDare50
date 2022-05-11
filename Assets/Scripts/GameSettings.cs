@@ -15,6 +15,10 @@ namespace LudumDare50 {
         public float SpaceBetweenStars => spaceBetweenStars;
         [SerializeField] private float starsRespawnTime;
         public float StarsRespawnTime => starsRespawnTime;
+        [SerializeField, Range(0f, 50f)] private float spaceBetweenObstacles;
+        public float SpaceBetweenObstacles => spaceBetweenObstacles;
+        [SerializeField] private float obstaclesRespawnTime;
+        public float ObstaclesRespawnTime => obstaclesRespawnTime;
         [SerializeField, Range(0f, 180f)] private float hookAimAngle;
         public float HookAimAngle => hookAimAngle;
         [SerializeField, Tooltip("Angles per second")] private float hookSwingingSpeed;

@@ -10,6 +10,7 @@ namespace LudumDare50 {
         [SerializeField] private BoolVariable isPlaying;
         [SerializeField] private StarRuntimeSet runtimeSet;
         [SerializeField] private StarEvent despawnedStarEvent;
+        [SerializeField] private EventSO updateStarSpawnerEvent;
         [SerializeField] private Collider2D collisionTrigger;
         [SerializeField] private StarAnimations starAnimations;
 
@@ -55,6 +56,7 @@ namespace LudumDare50 {
                 return;
 
             despawnedStarEvent.Raise(this);
+            updateStarSpawnerEvent.Raise();
         }
     }
 }

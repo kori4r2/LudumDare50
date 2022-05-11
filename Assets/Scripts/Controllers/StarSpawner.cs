@@ -1,123 +1,21 @@
 using UnityEngine;
 
 namespace LudumDare50 {
-    public class StarSpawner : MonoBehaviour {
-        [SerializeField] private ActiveGameSettingsReference gameSettings;
-        private float RespawnTime => gameSettings.StarsRespawnTime;
-        private Timer respawnTimer;
-        [SerializeField] private StarPool starPool;
+    public class StarSpawner : ObjectSpawner<Star> {
+        protected override float RespawnTime => gameSettings.StarsRespawnTime;
         [SerializeField] private StarPlacementCalculator placementCalculator;
-        [SerializeField] private StarEvent starDespawnedEvent;
-        private GenericEventListener<Star> starDespawnedEventListener;
-        [SerializeField] private BoolVariable isPlaying;
-        private VariableObserver<bool> isPlayingObserver;
+        protected override ObjectPlacementCalculator<Star> PlacementCalculator => placementCalculator;
+        [SerializeField] private StarPool starPool;
+        protected override ObjectPool<Star> ObjectPool => starPool;
+        [SerializeField] private EventSO updateStarSpawnerEvent;
+        protected override EventSO UpdateObjectSpawnerEvent => updateStarSpawnerEvent;
         [SerializeField] private RuntimeSet<Star> starsSpawned;
-        private int StarCount => starsSpawned.Count;
-        private bool CanSpawnStar => StarCount < placementCalculator.MaxNObjects;
-        [SerializeField] private EventSO cameraChangeEvent;
-        private EventListener cameraChangeEventListener;
+        protected override RuntimeSet<Star> ObjectsSpawned => starsSpawned;
 
-        private void Awake() {
-            respawnTimer = new Timer(RespawnTime);
-            placementCalculator.Setup(gameSettings, starPool.PoolSize, starsSpawned);
-            CreateObserversAndListeners();
-        }
-
-        private void CreateObserversAndListeners() {
-            isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
-            starDespawnedEventListener = new GenericEventListener<Star>(starDespawnedEvent, RemoveStarAndCheckRespawn);
-            cameraChangeEventListener = new EventListener(cameraChangeEvent, OnCameraChanged);
-        }
-
-        private void OnGameStateChanged(bool newIsPlaying) {
-            if (newIsPlaying) {
-                SpawnAllStars();
-            } else {
-                ReturnAllStarsToPool();
-                respawnTimer.StopTimer();
+        protected override void SpawnInitialObjects() {
+            while (CanSpawnObject) {
+                SpawnNewObject();
             }
-        }
-
-        private void SpawnAllStars() {
-            while (CanSpawnStar) {
-                SpawnNewStar();
-            }
-        }
-
-        private void SpawnNewStar() {
-            if (!CanSpawnStar)
-                return;
-
-            Vector3 newPosition = placementCalculator.GetNextObjectPosition();
-            starPool.InstantiateObject(newPosition, Quaternion.identity);
-        }
-
-        private void ReturnAllStarsToPool() {
-            foreach (Star star in starsSpawned.ToArray()) {
-                starPool.ReturnObjectToPool(star);
-            }
-        }
-
-        private void RemoveStarAndCheckRespawn(Star starDespawned) {
-            CheckForRespawn();
-        }
-
-        private void CheckForRespawn() {
-            if (CanSpawnStar && respawnTimer.IsDone) {
-                respawnTimer.StartTimer();
-            }
-        }
-
-        private void OnCameraChanged() {
-            placementCalculator.OnCameraChange?.Invoke();
-            RemoveStarsOutsideSpawnArea();
-            RemoveStarsAboveMaxNumber();
-        }
-
-        private void RemoveStarsOutsideSpawnArea() {
-            Rect spawnArea = placementCalculator.SpawnArea;
-            foreach (Star star in starsSpawned.ToArray()) {
-                if (CameraUtils.IsInsideLimits(star.transform.position, spawnArea.min, spawnArea.max))
-                    continue;
-
-                starPool.ReturnObjectToPool(star);
-            }
-        }
-
-        private void RemoveStarsAboveMaxNumber() {
-            if (StarCount <= placementCalculator.MaxNObjects)
-                return;
-
-            foreach (Star star in starsSpawned.ToArray()) {
-                starPool.ReturnObjectToPool(star);
-                if (StarCount <= placementCalculator.MaxNObjects)
-                    return;
-            }
-        }
-
-        private void Update() {
-            if (!isPlaying.Value || !CanSpawnStar)
-                return;
-
-            if (!respawnTimer.IsDone) {
-                respawnTimer.UpdateTimer(Time.deltaTime);
-                return;
-            }
-
-            SpawnNewStar();
-            CheckForRespawn();
-        }
-
-        private void OnEnable() {
-            isPlayingObserver.StartWatching();
-            starDespawnedEventListener.StartListeningEvent();
-            cameraChangeEventListener.StartListeningEvent();
-        }
-
-        private void OnDisable() {
-            isPlayingObserver.StopWatching();
-            starDespawnedEventListener.StopListeningEvent();
-            cameraChangeEventListener.StopListeningEvent();
         }
     }
 }

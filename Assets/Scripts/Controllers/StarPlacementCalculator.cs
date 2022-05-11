@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.Events;
-
 namespace LudumDare50 {
     [System.Serializable]
     public class StarPlacementCalculator : ObjectPlacementCalculator<Star> {

@@ -70,9 +70,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.018787902, g: 0.46226418, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,10 +92,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6356066375769239491}
   - component: {fileID: 6356066375769239501}
-  - component: {fileID: 6356066375769239500}
+  - component: {fileID: 2316958239431506245}
   m_Layer: 0
-  m_Name: Star
-  m_TagString: Star
+  m_Name: Obstacle
+  m_TagString: Bounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6356066375769239500
+--- !u!114 &2316958239431506245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,18 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6356066375769239490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c8cb704d619404fcb5895e3d6ce48b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c270ae8152b539c4a806397348315aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
-  currentTime: {fileID: 11400000, guid: 47d9c79866bfa9f8a91721f0175bcb12, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-  runtimeSet: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
-  despawnedStarEvent: {fileID: 11400000, guid: 31b4f1411c962d580a1a8c80b1162bfa, type: 2}
-  updateStarSpawnerEvent: {fileID: 11400000, guid: ae6ccdd3f0ce7b346991c3ef284173cf, type: 2}
-  collisionTrigger: {fileID: 6356066375769239501}
-  starAnimations:
-    starAnimator: {fileID: 0}
-    fadeInTriggerParameter: 
-    fadeOutTriggerParameter: 
-    struggleTriggerParameter: 
+  lifeTimeMin: 3
+  lifeTimeMax: 8
+  obstacleDespawnedEvent: {fileID: 11400000, guid: 88111b22043c1a04cb8e0deac27ead3c, type: 2}
+  updateObstacleSpawnerEvent: {fileID: 11400000, guid: 938c38f87ac9c8347afb4a8edb459b14, type: 2}
+  runtimeSet: {fileID: 11400000, guid: 9be04ac12a5363545bb17eb8b869f161, type: 2}

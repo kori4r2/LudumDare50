@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,10 +31,10 @@ namespace LudumDare50 {
 
         public T InstantiateObject(Vector3 position, Quaternion rotation) {
             T instantiatedObject = objectQueue.Dequeue();
-            instantiatedObject.InitObject();
             GameObject newObj = instantiatedObject.gameObject;
             newObj.transform.SetPositionAndRotation(position, rotation);
             newObj.SetActive(true);
+            instantiatedObject.InitObject();
             return instantiatedObject;
         }
 

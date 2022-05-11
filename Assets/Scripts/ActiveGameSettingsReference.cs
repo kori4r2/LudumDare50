@@ -9,6 +9,8 @@ namespace LudumDare50 {
         public float StarTimeGain => activeGameSettings.StarTimeGain;
         public float SpaceBetweenStars => activeGameSettings.SpaceBetweenStars;
         public float StarsRespawnTime => activeGameSettings.StarsRespawnTime;
+        public float SpaceBetweenObstacles => activeGameSettings.SpaceBetweenObstacles;
+        public float ObstaclesRespawnTime => activeGameSettings.ObstaclesRespawnTime;
         public float HookAimAngle => activeGameSettings.HookAimAngle;
         public float HookSwingingSpeed => activeGameSettings.HookSwingingSpeed;
         public float HookThrowSpeed => activeGameSettings.HookThrowSpeed;

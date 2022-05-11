@@ -312,7 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &682726905
 MonoBehaviour:
@@ -327,6 +327,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
+--- !u!1 &751317151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 751317152}
+  - component: {fileID: 751317154}
+  - component: {fileID: 751317153}
+  m_Layer: 0
+  m_Name: ObstaclesController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &751317152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751317151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &751317153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751317151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4b66c9b2e895a4b99b97b8d761a496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
+  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  placementCalculator:
+    mainCamera: {fileID: 519420031}
+  obstaclePool: {fileID: 751317154}
+  updateObectSpawnerEvent: {fileID: 11400000, guid: 938c38f87ac9c8347afb4a8edb459b14, type: 2}
+  obstaclesSpawned: {fileID: 11400000, guid: 9be04ac12a5363545bb17eb8b869f161, type: 2}
+--- !u!114 &751317154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751317151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44de4a6f96bb2e84a96fb076aeed2ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 30
+  obstaclePrefab: {fileID: 2316958239431506245, guid: 88c3348baf983d441884aa959f47f610, type: 3}
+  despawnedObstacleEvent: {fileID: 11400000, guid: 88111b22043c1a04cb8e0deac27ead3c, type: 2}
 --- !u!1 &879461803
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,16 +470,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
-  starPool: {fileID: 879461806}
+  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
   placementCalculator:
     mainCamera: {fileID: 519420031}
-    OnCameraChange:
-      m_PersistentCalls:
-        m_Calls: []
-  starDespawnedEvent: {fileID: 11400000, guid: 31b4f1411c962d580a1a8c80b1162bfa, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  starPool: {fileID: 879461806}
+  updateStarSpawnerEvent: {fileID: 11400000, guid: ae6ccdd3f0ce7b346991c3ef284173cf, type: 2}
   starsSpawned: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
-  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
 --- !u!1 &1163283379
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +547,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &349477623973221323
 PrefabInstance:

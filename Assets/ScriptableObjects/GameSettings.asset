@@ -18,6 +18,8 @@ MonoBehaviour:
   starTimeGain: 3
   spaceBetweenStars: 6
   starsRespawnTime: 2
+  spaceBetweenObstacles: 8
+  obstaclesRespawnTime: 4
   hookAimAngle: 120
   hookSwingingSpeed: 90
   hookThrowSpeed: 10
