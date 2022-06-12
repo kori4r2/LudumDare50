@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5853531919424503023}
   - component: {fileID: 7799290031389315697}
-  - component: {fileID: 6296426036329300267}
+  - component: {fileID: 6268819749672852077}
   m_Layer: 0
   m_Name: Bounds
   m_TagString: Bounds
@@ -57,7 +57,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &6296426036329300267
+--- !u!114 &6268819749672852077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,11 +66,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5315100358066083273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b4e80570be5b01e8393f5853313843, type: 3}
+  m_Script: {fileID: 11500000, guid: d12aa08f9bd1c5b48a1256febcc9847d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   edgeRadius: 0.3
   padding: 3
   boundsCamera: {fileID: 0}
   boundsCollider: {fileID: 7799290031389315697}
-  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}

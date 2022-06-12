@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054023664237397808}
   - component: {fileID: 2250204778547854937}
-  - component: {fileID: 4119460508026577787}
+  - component: {fileID: 3554093254144237969}
   m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4119460508026577787
+--- !u!114 &3554093254144237969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,11 +92,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5724201992341217131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82e6fbef4cdd1638a950a1bc3c84313, type: 3}
+  m_Script: {fileID: 11500000, guid: 08909e6f9fcf82b47bdbe50489a69875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scalingCamera: {fileID: 0}
   spriteRenderer: {fileID: 2250204778547854937}
+  canvasChangeEvent: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}
 --- !u!1 &8927960461502887419
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
   timer:
-    timeVariable: {fileID: 11400000, guid: 47d9c79866bfa9f8a91721f0175bcb12, type: 2}
+    timeVariable: {fileID: 11400000, guid: 9f93abf2e8dfce20c8f477d4bde147bf, type: 2}
   backgroundShaderMaterial: {fileID: 2100000, guid: 06dfa7411076e5cbd8533f69be86aad1, type: 2}
   gameplaySmoothing: 0.9
   cutsceneSmoothing: 0.8

@@ -206,8 +206,8 @@ MonoBehaviour:
   hookMovable:
     movableRigidbody: {fileID: 3028985540662351456}
   hitStarEvent: {fileID: 11400000, guid: c7a4dfb07ba50c5aba761c2f2a51c6e8, type: 2}
-  pulledBackHook: {fileID: 11400000, guid: 0ff8ecff64b1b53cf9833773c7cfcc9c, type: 2}
-  threwHook: {fileID: 11400000, guid: b6881b7cf0652bf4586520bf13d12f42, type: 2}
+  pulledBackHook: {fileID: 11400000, guid: f171345a7fb3ac62e87912ad17b3681e, type: 2}
+  threwHook: {fileID: 11400000, guid: 9ba4fe5b8bec464d1bc02cb6bd54dc07, type: 2}
   hookAnimation:
     spriteRenderer: {fileID: 2879589867211307308}
     indicatorSprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
@@ -216,8 +216,8 @@ MonoBehaviour:
     hookAnchorPointOffset: {x: 0, y: -1, z: 0}
     hookAnimator: {fileID: 0}
     shakeHookBoolParameter: 
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-  canCharacterMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
+  canCharacterMove: {fileID: 11400000, guid: 2afaa42ca8814c70699006b3788299b0, type: 2}
   starsRuntimeSet: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
 --- !u!50 &3028985540662351456
 Rigidbody2D:

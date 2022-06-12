@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5792060776460005937}
-  - component: {fileID: 3042162463084186431}
+  - component: {fileID: 7592052461931668669}
   m_Layer: 5
   m_Name: CanvasChangeDetector
   m_TagString: Untagged
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3042162463084186431
+--- !u!114 &7592052461931668669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3000250278053408777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2679a4b5deffc8731ae50dc73fdd8bd5, type: 3}
+  m_Script: {fileID: 11500000, guid: adc0a3ee059035449b731ced1cc073a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventToRaise: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  eventToRaise: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}
 --- !u!1 &4266129811697206995
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-        m_TargetAssemblyTypeName: LudumDare50.GenericVariable`1[[System.Boolean,
+      - m_Target: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
+        m_TargetAssemblyTypeName: Toblerone.Toolbox.GenericVariable`1[[System.Boolean,
           mscorlib
         m_MethodName: set_Value
         m_Mode: 6
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayingObserver:
-    observedVariable: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+    observedVariable: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
     callbackOnChange:
       m_PersistentCalls:
         m_Calls:

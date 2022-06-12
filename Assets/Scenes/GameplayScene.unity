@@ -249,8 +249,8 @@ GameObject:
   m_Component:
   - component: {fileID: 682726904}
   - component: {fileID: 682726903}
-  - component: {fileID: 682726905}
   - component: {fileID: 682726902}
+  - component: {fileID: 682726905}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 682726901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb5ea4440d1f7aabd8bbc5e9fe03648e, type: 3}
+  m_Script: {fileID: 11500000, guid: e75a4a50bd397bc45a9c78b4e15165c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: c3881a011792c8038bac3c87fd978b13, type: 3}
@@ -372,12 +372,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}
   placementCalculator:
     mainCamera: {fileID: 519420031}
   obstaclePool: {fileID: 751317154}
-  updateObectSpawnerEvent: {fileID: 11400000, guid: 938c38f87ac9c8347afb4a8edb459b14, type: 2}
+  updateObectSpawnerEvent: {fileID: 11400000, guid: 392dd652c28026f7498aa72199ebb2ab, type: 2}
   obstaclesSpawned: {fileID: 11400000, guid: 9be04ac12a5363545bb17eb8b869f161, type: 2}
 --- !u!114 &751317154
 MonoBehaviour:
@@ -426,8 +426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starHitEvent: {fileID: 11400000, guid: c7a4dfb07ba50c5aba761c2f2a51c6e8, type: 2}
-  pulledHookEvent: {fileID: 11400000, guid: 0ff8ecff64b1b53cf9833773c7cfcc9c, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
+  pulledHookEvent: {fileID: 11400000, guid: f171345a7fb3ac62e87912ad17b3681e, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
 --- !u!4 &879461805
 Transform:
   m_ObjectHideFlags: 0
@@ -470,12 +470,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 9a5bc70cee31164cfb0e1254ffdd5187, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}
   placementCalculator:
     mainCamera: {fileID: 519420031}
   starPool: {fileID: 879461806}
-  updateStarSpawnerEvent: {fileID: 11400000, guid: ae6ccdd3f0ce7b346991c3ef284173cf, type: 2}
+  updateStarSpawnerEvent: {fileID: 11400000, guid: 4bf0080e5a1d838f096ea63e6eccb23e, type: 2}
   starsSpawned: {fileID: 11400000, guid: ff17116bcc1237fbebd8e6918b574868, type: 2}
 --- !u!1 &1163283379
 GameObject:
@@ -661,6 +661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6268819749672852077, guid: a30b33571030a435584188b7d331fdcb, type: 3}
+      propertyPath: boundsCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 6296426036329300267, guid: a30b33571030a435584188b7d331fdcb, type: 3}
       propertyPath: boundsCamera
       value: 
@@ -783,6 +787,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3554093254144237969, guid: 8e8836a494af201ea990e0de0f293ffc, type: 3}
+      propertyPath: scalingCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 4119460508026577787, guid: 8e8836a494af201ea990e0de0f293ffc, type: 3}
       propertyPath: scalingCamera
       value: 

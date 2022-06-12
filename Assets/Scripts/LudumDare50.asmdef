@@ -2,6 +2,7 @@
     "name": "LudumDare50",
     "rootNamespace": "LudumDare50",
     "references": [
+        "GUID:f32b1e5c2273b7f47afe6362607ed475",
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [

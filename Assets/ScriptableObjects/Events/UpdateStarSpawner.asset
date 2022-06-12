@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2885a02c9fe81c059d2422934224888, type: 3}
+  m_Script: {fileID: 11500000, guid: 640654336579c9e4096c6fb772b4463e, type: 3}
   m_Name: UpdateStarSpawner
   m_EditorClassIdentifier: 

@@ -81,9 +81,9 @@ MonoBehaviour:
   movable2D:
     movableRigidbody: {fileID: 349477624079235592}
   characterCollider: {fileID: 6398844497354156259}
-  canMove: {fileID: 11400000, guid: 747570f08cf6b0ed6b018eaf323f8db7, type: 2}
-  isPlaying: {fileID: 11400000, guid: bdb284c49d6b41b05a77c1c290f8a815, type: 2}
-  cameraChangeEvent: {fileID: 11400000, guid: 2bacd6d4722ef6f258930b05ae961743, type: 2}
+  canMove: {fileID: 11400000, guid: 2afaa42ca8814c70699006b3788299b0, type: 2}
+  isPlaying: {fileID: 11400000, guid: 6b81cd0dcf568e94597ec1b9c1586dd5, type: 2}
+  cameraChangeEvent: {fileID: 11400000, guid: 9577ff7677567e84e84d02e612b09ff7, type: 2}
   characterAnimations:
     characterAnimator: {fileID: 0}
     movementBoolParameter: 
@@ -91,9 +91,9 @@ MonoBehaviour:
     throwHookTriggerParameter: 
     struggleStarTriggerParameter: 
     pullHookTriggerParameter: 
-    threwHookEvent: {fileID: 11400000, guid: b6881b7cf0652bf4586520bf13d12f42, type: 2}
+    threwHookEvent: {fileID: 11400000, guid: 9ba4fe5b8bec464d1bc02cb6bd54dc07, type: 2}
     hitStarEvent: {fileID: 11400000, guid: c7a4dfb07ba50c5aba761c2f2a51c6e8, type: 2}
-    pulledHookEvent: {fileID: 11400000, guid: 0ff8ecff64b1b53cf9833773c7cfcc9c, type: 2}
+    pulledHookEvent: {fileID: 11400000, guid: f171345a7fb3ac62e87912ad17b3681e, type: 2}
   hook: {fileID: 8450827318040720280}
 --- !u!61 &6398844497354156259
 BoxCollider2D:

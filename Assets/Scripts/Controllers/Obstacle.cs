@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Toblerone.Toolbox;
 
 namespace LudumDare50 {
     public class Obstacle : MonoBehaviour, IPoolableObject {

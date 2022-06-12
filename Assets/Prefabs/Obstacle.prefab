@@ -146,5 +146,5 @@ MonoBehaviour:
   lifeTimeMin: 3
   lifeTimeMax: 8
   obstacleDespawnedEvent: {fileID: 11400000, guid: 88111b22043c1a04cb8e0deac27ead3c, type: 2}
-  updateObstacleSpawnerEvent: {fileID: 11400000, guid: 938c38f87ac9c8347afb4a8edb459b14, type: 2}
+  updateObstacleSpawnerEvent: {fileID: 11400000, guid: 392dd652c28026f7498aa72199ebb2ab, type: 2}
   runtimeSet: {fileID: 11400000, guid: 9be04ac12a5363545bb17eb8b869f161, type: 2}

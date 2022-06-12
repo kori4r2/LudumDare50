@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Toblerone.Toolbox;
 
 namespace LudumDare50 {
     public abstract class ObjectSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolableObject {
