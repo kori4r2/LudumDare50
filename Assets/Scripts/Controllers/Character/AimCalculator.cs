@@ -32,7 +32,7 @@ namespace LudumDare50 {
         public void UpdateAim(float deltaTime) {
             Vector3 rotationAxis = (TimeIndex > 1) ? Vector3.forward : Vector3.back;
             int nQuarterPeriodsPassed = Mathf.FloorToInt(aimTime / QuarterPeriod);
-            float swingOffsetTime = aimTime - nQuarterPeriodsPassed * QuarterPeriod;
+            float swingOffsetTime = aimTime - (nQuarterPeriodsPassed * QuarterPeriod);
             ThrowDirection = Quaternion.AngleAxis(swingingSpeed * swingOffsetTime, rotationAxis) * SwingStartingPoint;
             aimTime += deltaTime;
         }

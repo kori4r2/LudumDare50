@@ -8,7 +8,7 @@ namespace LudumDare50 {
         [SerializeField] private GameTimer timer;
         private float MaxMaterialOffset => 0.8f;
         private float MinMaterialOffset => -1f;
-        private float CurrentMaterialOffset => MinMaterialOffset + (MaxMaterialOffset - MinMaterialOffset) * timer.CurrentProgress;
+        private float CurrentMaterialOffset => MinMaterialOffset + ((MaxMaterialOffset - MinMaterialOffset) * timer.CurrentProgress);
         private float lastUsedOffset;
         [SerializeField] private Material backgroundShaderMaterial;
         [SerializeField, Range(0f, 0.95f)] private float gameplaySmoothing = 0.5f;

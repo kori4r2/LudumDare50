@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Toblerone.Toolbox;
@@ -120,7 +119,7 @@ namespace LudumDare50 {
             GameObject otherObject = collider.gameObject;
             if (otherObject.CompareTag(Star.starTag)) {
                 OnStarCollision(otherObject);
-            } else if (otherObject.CompareTag(Toblerone.Toolbox.Bounds.boundsTag)) {
+            } else if (otherObject.CompareTag(CameraEdgeCollider.boundsTag)) {
                 OnBoundsCollision();
             }
         }

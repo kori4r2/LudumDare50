@@ -1,13 +1,14 @@
 {
   "dependencies": {
     "com.toblerone.toolbox": {
-      "version": "https://github.com/kori4r2/TobleroneBox.git#1.0.1",
+      "version": "https://github.com/kori4r2/TobleroneBox.git#1.4.3",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.inputsystem": "1.0.2"
+        "com.unity.inputsystem": "1.0.2",
+        "com.unity.textmeshpro": "3.0.6"
       },
-      "hash": "8d9a42a4d4a4e381cc4c2dafb8746a6a78710adc"
+      "hash": "171317b27453a7a13e23165c99c59b33e674b89e"
     },
     "com.unity.2d.animation": {
       "version": "5.0.10",

@@ -1,3 +1,5 @@
+using Toblerone.Toolbox;
+
 namespace LudumDare50 {
     [System.Serializable]
     public class StarPlacementCalculator : ObjectPlacementCalculator<Star> {
