@@ -6,8 +6,8 @@ namespace LudumDare50 {
         [SerializeField] private ActiveGameSettingsReference gameSettings;
         [SerializeField] private BoolVariable isPlaying;
         [SerializeField] private GameTimer timer;
-        private float MaxMaterialOffset => 0.8f;
-        private float MinMaterialOffset => -1f;
+        private const float MaxMaterialOffset = 0.8f;
+        private const float MinMaterialOffset = -1f;
         private float CurrentMaterialOffset => MinMaterialOffset + ((MaxMaterialOffset - MinMaterialOffset) * timer.CurrentProgress);
         private float lastUsedOffset;
         [SerializeField] private Material backgroundShaderMaterial;

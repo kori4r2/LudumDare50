@@ -12,11 +12,14 @@ namespace LudumDare50 {
         [SerializeField] private StarRuntimeSet runtimeSet;
         [SerializeField] private StarEvent despawnedStarEvent;
         [SerializeField] private EventSO updateStarSpawnerEvent;
+        [SerializeField] private EventSO pulledBackHook;
+        private EventListener pulledBackHookListener = null;
         [SerializeField] private Collider2D collisionTrigger;
         [SerializeField] private StarAnimations starAnimations;
 
         private void Awake() {
             tag = starTag;
+            pulledBackHookListener = new EventListener(pulledBackHook, FadeOut);
         }
 
         public void InitObject() {
@@ -30,20 +33,33 @@ namespace LudumDare50 {
 
         private void OnDisable() {
             runtimeSet.RemoveElement(this);
+            pulledBackHookListener.StopListeningEvent();
+            // TO DO Delete
             StopAllCoroutines();
         }
 
         public void StartStruggleAnimation() {
             starAnimations.TriggerStruggle();
+            pulledBackHookListener.StartListeningEvent();
+            // TO DO This should be in the Character's animation
+            StartCoroutine(DebugAutoReturnCoroutine());
+        }
+
+        private IEnumerator DebugAutoReturnCoroutine() {
+            yield return new WaitForSeconds(.5f);
+            if (pulledBackHook)
+                pulledBackHook.Raise();
         }
 
         public void FadeOut() {
             if (!isPlaying.Value)
                 return;
 
+            pulledBackHookListener.StopListeningEvent();
             currentTime.Value += TimeGain;
             collisionTrigger.enabled = false;
             starAnimations.TriggerFadeOut();
+            // TO DO This should be in the Star's animation
             StartCoroutine(DebugDespawnAfterTimeCoroutine());
         }
 

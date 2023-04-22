@@ -46,8 +46,6 @@ namespace LudumDare50 {
             if (newIsPlaying)
                 return;
 
-            // TODO delete
-            StopAllCoroutines();
             StopHookMovement();
             ReturnHook();
         }
@@ -125,21 +123,15 @@ namespace LudumDare50 {
         }
 
         private void OnStarCollision(GameObject otherObject) {
-            Star star = starsRuntimeSet.GetActiveElement(otherObject);
-            if (star == null)
+            Star starHit = starsRuntimeSet.GetActiveElement(otherObject);
+            if (starHit == null)
                 return;
 
             ignoreTriggers = true;
             StopHookMovement();
             if (hitStarEvent)
-                hitStarEvent.Raise(star);
-            StartCoroutine(DebugAutoReturnCoroutine());
-        }
-
-        private IEnumerator DebugAutoReturnCoroutine() {
-            yield return new WaitForSeconds(.5f);
-            if (pulledBackHook)
-                pulledBackHook.Raise();
+                hitStarEvent.Raise(starHit);
+            starHit.StartStruggleAnimation();
         }
 
         private void OnBoundsCollision() {

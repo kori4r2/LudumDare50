@@ -13,12 +13,12 @@ namespace LudumDare50 {
 
         public void Setup(ActiveGameSettingsReference gameSettings, BoolVariable isPlayingReference) {
             isPlaying = isPlayingReference;
-            isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
+            isPlayingObserver = new VariableObserver<bool>(isPlaying, ResetTimeOnGameStart);
             maxTime = gameSettings.MaxTime;
             timeVariable.Value = maxTime;
         }
 
-        private void OnGameStateChanged(bool newIsPlaying) {
+        private void ResetTimeOnGameStart(bool newIsPlaying) {
             if (newIsPlaying)
                 timeVariable.Value = maxTime;
         }

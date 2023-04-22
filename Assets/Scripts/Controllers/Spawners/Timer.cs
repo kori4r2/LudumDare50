@@ -22,9 +22,8 @@ namespace LudumDare50 {
                 return;
 
             TimeLeft -= deltaTime;
-            if (TimeLeft <= 0f) {
+            if (IsDone)
                 TimeLeft = 0f;
-            }
         }
     }
 }
