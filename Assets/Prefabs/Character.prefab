@@ -78,6 +78,14 @@ MonoBehaviour:
     onRelease:
       m_PersistentCalls:
         m_Calls: []
+    onMove:
+      m_PersistentCalls:
+        m_Calls: []
+  characterMovement:
+    movable2D:
+      movableRigidbody: {fileID: 349477624079235592}
+    characterCollider: {fileID: 6398844497354156259}
+    canMove: {fileID: 11400000, guid: 2afaa42ca8814c70699006b3788299b0, type: 2}
   movable2D:
     movableRigidbody: {fileID: 349477624079235592}
   characterCollider: {fileID: 6398844497354156259}
