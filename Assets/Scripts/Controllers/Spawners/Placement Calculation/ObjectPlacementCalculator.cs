@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using Toblerone.Toolbox;
 
 namespace LudumDare50 {
@@ -16,15 +15,15 @@ namespace LudumDare50 {
         public Rect SpawnArea => spawnArea;
         private IObjectSpreader objectSpreader;
         public int MaxNObjects { get; private set; }
-        public UnityEvent OnCameraChange { get; private set; }
+        private int poolSize;
 
         public abstract void Setup(ActiveGameSettingsReference gameSettings, int poolSize, RuntimeSet<T> runtimeSet);
 
         protected void Setup(int poolSize, RuntimeSet<T> runtimeSet) {
             objects = runtimeSet;
+            this.poolSize = poolSize;
             UpdateSpawnArea();
-            CalculateMaxObjects(poolSize);
-            SetupCameraChangeCallbacks(poolSize);
+            CalculateMaxObjects();
             objectSpreader = new SpreadFromRandomCircle();
             objectSpreader.Setup(spawnArea);
         }
@@ -37,18 +36,17 @@ namespace LudumDare50 {
             spawnArea.height -= borderSize;
         }
 
-        private void CalculateMaxObjects(int poolSize) {
+        private void CalculateMaxObjects() {
             float availableArea = spawnArea.width * spawnArea.height;
             float objectRadius = spaceBetweenObjects / 2f;
             float spacePerObject = Mathf.Pow(objectRadius, 2f);
             MaxNObjects = Mathf.Clamp(Mathf.FloorToInt(availableArea / spacePerObject), MinNObjects, poolSize);
         }
 
-        private void SetupCameraChangeCallbacks(int poolSize) {
-            OnCameraChange = new UnityEvent();
-            OnCameraChange.AddListener(UpdateSpawnArea);
-            OnCameraChange.AddListener(() => CalculateMaxObjects(poolSize));
-            OnCameraChange.AddListener(() => objectSpreader.Setup(spawnArea));
+        public void OnCameraChanged() {
+            UpdateSpawnArea();
+            CalculateMaxObjects();
+            objectSpreader.Setup(spawnArea);
         }
 
         public Vector3 GetNextObjectPosition() {

@@ -26,7 +26,7 @@ namespace LudumDare50 {
 
         private void CreateObserversAndListeners() {
             isPlayingObserver = new VariableObserver<bool>(isPlaying, OnGameStateChanged);
-            updateObjectSpawnerEventListener = new EventListener(UpdateObjectSpawnerEvent, RemoveObjectAndCheckRespawn);
+            updateObjectSpawnerEventListener = new EventListener(UpdateObjectSpawnerEvent, CheckForRespawn);
             cameraChangeEventListener = new EventListener(cameraChangeEvent, OnCameraChanged);
         }
 
@@ -57,10 +57,6 @@ namespace LudumDare50 {
             }
         }
 
-        private void RemoveObjectAndCheckRespawn() {
-            CheckForRespawn();
-        }
-
         private void CheckForRespawn() {
             if (CanSpawnObject && respawnTimer.IsDone) {
                 respawnTimer.StartTimer();
@@ -68,7 +64,7 @@ namespace LudumDare50 {
         }
 
         private void OnCameraChanged() {
-            PlacementCalculator.OnCameraChange?.Invoke();
+            PlacementCalculator.OnCameraChanged();
             RemoveObjectsOutsideSpawnArea();
             RemoveObjectsAboveMaxNumber();
         }

@@ -3,6 +3,7 @@ using Toblerone.Toolbox;
 
 namespace LudumDare50 {
     public class Character : MonoBehaviour {
+        public const string characterTag = "Character";
         [Header("Settings")]
         [SerializeField] private ActiveGameSettingsReference gameSettings;
         [Header("Input")]
@@ -17,13 +18,11 @@ namespace LudumDare50 {
         [SerializeField] private EventSO cameraChangeEvent;
         private EventListener camerachangeEventListener;
         private VariableObserver<bool> canMoveObserver;
+        private bool isMoving = false;
         [Header("Animation")]
         [SerializeField] private CharacterAnimations characterAnimations;
         [Header("Hook")]
         [SerializeField] private Hook hook;
-        public const string characterTag = "Character";
-
-        private bool isMoving = false;
 
         private void Awake() {
             tag = characterTag;
