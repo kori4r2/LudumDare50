@@ -4,6 +4,7 @@ using Toblerone.Toolbox;
 namespace LudumDare50 {
     [RequireComponent(typeof(Collider2D))]
     public class Hook : MonoBehaviour {
+        private readonly Vector2 defaultPosition = Vector2.up;
         [Header("Settings")]
         [SerializeField] private ActiveGameSettingsReference gameSettings;
         private AimCalculator aimCalculator;
@@ -33,6 +34,13 @@ namespace LudumDare50 {
             isPlayingObserver = new VariableObserver<bool>(isPlaying, GameStateChanged);
             hookAnimation.Setup(threwHook, hitStarEvent, pulledBackHook);
             HideHook();
+        }
+
+        private void HideHook() {
+            transform.localPosition = startingPosition;
+            StopHookMovement();
+            hookAnimation.HideHook();
+            IsAiming = false;
         }
 
         private void ReturnHook() {
@@ -76,7 +84,7 @@ namespace LudumDare50 {
         }
 
         private void UpdateRotation() {
-            transform.rotation = Quaternion.FromToRotation(Vector2.up, aimCalculator.ThrowDirection);
+            transform.rotation = Quaternion.FromToRotation(defaultPosition, aimCalculator.ThrowDirection);
         }
 
         public void StartAiming() {
@@ -137,13 +145,6 @@ namespace LudumDare50 {
             StopHookMovement();
             if (pulledBackHook)
                 pulledBackHook.Raise();
-        }
-
-        private void HideHook() {
-            transform.localPosition = startingPosition;
-            StopHookMovement();
-            hookAnimation.HideHook();
-            IsAiming = false;
         }
 
         private void FixedUpdate() {
