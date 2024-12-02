@@ -16,7 +16,7 @@ jobs:
       contains(github.event.inputs.targets, 'android'))
     name: Generate And Upload Android Build Files
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-android-0.15.0
+    container: unityci/editor:ubuntu-2020.3.11f1-android-3.1.0
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
@@ -37,11 +37,11 @@ jobs:
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache Library
         id: cache-library
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: Library
           key: Library-2020.3.11-android
@@ -54,7 +54,7 @@ jobs:
           export ANDROID_BUILD_FILENAME=$(ls Build/Android/*.apk | sed -e 's/Build\/Android\///')
           echo "ANDROID_BUILD_FILENAME=$ANDROID_BUILD_FILENAME" >> $GITHUB_ENV
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ANDROID_BUILD_FILENAME }}
           path: ./Build/${{ env.ANDROID_BUILD_PATH }}
@@ -66,7 +66,7 @@ jobs:
       contains(github.event.inputs.targets, 'web'))
     name: Generate And Upload WebGL Build Files
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2020.3.11f1-webgl-0.15.0
+    container: unityci/editor:ubuntu-2020.3.11f1-webgl-3.1.0
     env:
       DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
 
@@ -87,11 +87,11 @@ jobs:
           unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache Library
         id: cache-library
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: Library
           key: Library-2020.3.11-webgl
@@ -101,7 +101,7 @@ jobs:
           make webgl UNITY_EXECUTABLE=unity-editor
           echo "WEB_BUILD_NAME=Web" >> $GITHUB_ENV
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.WEB_BUILD_NAME }}
           path: ./Build/${{ env.WEB_BUILD_NAME }}
